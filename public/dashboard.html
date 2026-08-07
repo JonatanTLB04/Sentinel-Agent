@@ -1,0 +1,179 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SENTINEL — The Launch Box</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+<div class="sidebar">
+  <div class="logo-wrap">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAlgAAAJVCAYAAAAC+IsCAAAACXBIWXMAACg0AAAoNAEEqMBLAAAgAElEQVR4nO3dzW5cSZqY4eBAe7J9A2QvvSIHmL3UewNiw1sDouBFLUt1BaW+glED3hd1BaYuwChqX8BQMGDv3OTKO5vcDjygkaXILhbFn/yJL05EnOcBCE8b3WTmYYr55nfixNm5vb1NAMCWvtvZSymdppReO5Qz9m8ppf+R/s+LuR8HANja17g6TykdOpgzluMq/Wv6d//QwMMBgH6JK9Lv42rxHwUWAGxKXJG+jasksABgQ+KK9HBcJYEFABsQV6TH4yoJLABYk7giPR1XSWABwBrEFen5uEoCCwBWJK5Iq8VVElgAsAJxRVo9rpLAAoBniCvSenGVBBYAPEFckdaPqySwAOAR4oq0WVwlgQUADxBXpM3jKgksALhHXJG2i6sksADgDnFF2j6uksACgExckcrEVRJYACCuyArFVRJYAMyeuCKVjasksACYNXFFKh9XSWABMFviihQTV0lgATBL4ooUF1dJYAEwO+KKFBtXSWABMCviihQfV0lgATAb4opUJ66SwAJgFsQVqV5cJYEFwPDEFaluXCWBBcDQxBWpflwlgQXAsMQVaZq4SgILgCGJK9J0cZUEFgDDEVekaeMqCSwAhiKuSNPHVRJYAAxDXJHaiKsksAAYgrgitRNXSWAB0D1xRWorrpLAAqBr4orUXlwlgQVAt8QVqc24SgILgC6JK1K7cZUEFgDdEVektuMqCSwAuiKuSO3HVRJYAHRDXJH6iKsksADogrgi9RNXSWAB0DxxReorrpLAAqBp4orUX1wlgQVAs8QVqc+4SgILgIYdi6uZ6zSuksACAJrUcVwt7Nze3jbwMADgAd/tnKWUXjs0M9N5XCWBBQAd+G7nfUrpx1n8qgaIqySwAKAT3+2M/4Y9SFwla7AAoAPf7ZwM/2saKK6SwAKALrwf+tc0WFwlgQUAjfs6vdof9tc0YFwlgQUAzRt3ejVoXCWBBQANG3l6NXBcJYEFAE0bc3o1eFwlgQUAjRp1ejWDuEoCCwCaNd70aiZxlQQWADRoxOnVjOIqCSwAaNJY06uZxVUSWADQmK/3HRxnejXDuEruRQgADfluZy+ldJlS2h3i1zLTuEomWADQlHfiagwmWADQgpGmVzOPq2SCBQDNGGN6Ja5+ZYIFAFMbZXolrv7OBAsAptf/9Epc/Y4JFgBMaYTplbj6hgkWAEyr7+mVuHqQCRYATKX36ZW4epQJFgBMp9/plbh6kgkWAEyh5+mVuHqWCRYATKPP6ZW4WokJFgDU1uv0SlytzAQLAOrrb3olrtZiggUANfU4vRJXazPBAoC6+ppeiauNmGABQC29Ta/E1cZMsACgng/iah5MsACghu92DlJKf+viWIurrZlgAUAd77s4zuKqCBMsAIjWy/RKXBVjggUA8dqfXomrokywACBSD9MrcVWcCRYAxGp7eiWuQphgAUCU1qdX4iqMCRYAxGl3eiWuQi0C69bXSl/nG/wizoOP7SaPaRM9PY/3Xs9VXxvAY75Or940eXzEVTgTLACI0eb0SlxVIbAAoLRWp1fiqhqBBQDltTe9EldVCSwAKKnF6ZW4qk5gAUBZbU2vxNUkBBYAlNLa9EpcTUZgAUA57UyvxNWkBBYAlPDdzqtmplfianICCwDKaGN6Ja6aILAAYFtfp1cvJz+O4qoZAgsAtjf99EpcNUVgAcA2WpheiavmCCwA2M600ytx1SSBBQCbmnp6Ja6aJbAAYHPTTa/EVdMEFgBsYsrplbhqnsACgM1MM70SV10QWACwrqmmV+KqGwILANZXf3olrrryIqX0pwoP+ENK6TDw+39MKZ0Gfv+F6+DvTz9q/JvZltcrRJlieiWuurMIrPMKDzr6j/1lpecByWsNZq/u9Go+cXX167H95fY0/dPO4hj/2MBj2phThACwqtrTq3nE1SKs3qZfbg9+jauFX27buHH2Fl50+8gBoL56b/zjx9VvE6sBCSwAWEXN6dXYcTV0WC0JLABYzYcqx2ncuJpFWC0JLAB4znc7J8FXw381Zlzd/BqnA6yrWofAAoDnxcfBeHF1k6d+i7ia3dYxAgsAnvJ1erUfeozGiqtZh9WSwAKAp8VOr8aJK2F1h8ACgMdET6/GiCth9QCBBQCPi5te9R9XwuoJAgsAHhI5veo7roTVCgQWADwsZnrVb1wJqzUILAC4L2p61WdcCasNCCwA+Fb56VWfcfUx775+2cBj6YrAAoC7IqZX/cWVsNqSwAKA3ys7veorroRVIQILAJZKT6/6iSthVZjAAoDflJte9RFXwiqIwAKAVHh61X5cCatgAgsAviozvWo7roRVJQILAL7beVdketVuXAmrygQWAPP23c5ekelVm3ElrKbxSWABMHeL6dXuVsegvbj6nMPqvIHHMjdfUkonAguA+fo6vXq31fNvK66E1bQWcfVqcUshgQXAnG03vWonroTV9P4eV8kaLABma9vpVRtxJaza8Lu4SgILgBnbfHo1fVwJq3Z8E1dJYAEwS9tMr6aNK2HVlgfjKgksAGZqs+nVdHElrNrzaFwlgQXA7Gw6vZomroRVm56MqySwAJih9adX9ePqy6+PU1i16Nm4SgILgFnZZHpVN66u8sTqtMLPYn0rxVUSWADMzHrTq3pxJazat3JcJYEFwGysO72qE1fCqg9rxVUSWADMyOrTq/i4Elb9WDuuksDq3suU0u3cD8IEWjjmf0opWfwKq1pnehUbV8KqLxvFVRJYAMzEatOruLgSVv3ZOK6SwAJgeKtOr2LiSlj1aau4SgILgBl4/+z0qnxcCat+bR1XSWABMLTvdg5SSt8/+RTLxtVNDqsPXlhdKhJXSWABMLj3Tz69cnG1CKsPv34VeHNmEsXiKgksAIb1dXr15tGnVyauhNUYisZVElgADOzx6dX2cSWsxlE8rpLAAmBIT02vtosrYTWWkLhKAguAQT08vdo8roTVeMLiKgksAIbz2PRqs7gSVmMKjasksAAY0LfTq/XjSliNKzyuksACYCgPTa/WiythNbYqcZUEFgCD+f30ar24+mveJFRYjalaXCWBBcAw7k+vVo+rjzmsLr0YhlU1rpLAAmAgv02vVosrYTUP1eMqCSwAhnB3evV8XAmr+ZgkrpLAAmAQX6dXT8eVsJqXyeIqCSwAurecXj0eV8JqfiaNqySwABjA+0fiSljN0+RxlQRW9z7/+iKKd55Sejn3g33HTjOPBObuu52j9G/pzb24Elbz1URcJYEFQNf+X/ov6X/+Pa6E1bw1E1dJYAHQrf+08x/S/0r/Pv1r+u8ppXfpl9sLv8zZaiquksACoFv/O/05/Wv6j+mX23O/xFlrLq6SwAKgW//t9j/75c1ek3G18A8NPAYAgHU1G1dJYAEAHWo6rpLAAgA603xcJYEFAHSki7hKAgsA6EQ3cZUEFgDQqI93HlZXcZVs0wAANOmX25P0TzvLPc7OeoqrJLAAgGb9cnva6y/HKUIAgMIEFgBAYQILAKAwgQUAUJjAAgAoTGABABQmsAAAChNYAACFCSwAgMIEFgBAYQILAKAwgQUAUJjAAgAoTGABABQmsAAAChNYAACFCSwAgMIEFgBAYQILAKAwgQUAUJjAAgAoTGABABQmsAAAChNYAACFCSwAgMIEFgBAYQILAKAwgQUAUJjAAgAo7IUDCmt71cEhu04pXTTwOABmSWDB+n7u4Jh97iQEAYbkFCEAQGECCwCgMIEFAFCYwAIAKExgAQAUJrAAAAoTWAAAhQksAIDCBBYAQGECCwCgMIEFAFCYwAIAKExgAQAUJrAAAAoTWAAAhQksAIDCBBYAQGECCwCgMIEFAFDYzu3trWMKAFCQCRYAQGECCwCgMIEFAFCYwAIAKExgAQAUJrAAAAoTWAAAhQksAIDCBBYAQGECCwCgMIEFAFCYwAIAKExgAQAUJrAAAAoTWAAAhQksAIDCBBYAQGECCwCgMIEFAFCYwAIAKExgAQAUJrAAAAoTWAAAhQksAIDCBBYAQGECCwCgMIEFAFCYwAIAKExgAQAUJrAAAAoTWAAAhQksAIDCBBYAQGECCwCgMIEFAFCYwAIAKExgAQAUJrAAAAoTWAAAhQksAIDCXjigANxzkL8ecu5gwfMEFsD87KWUjlJKr+7E1OI/7655JD7n/3cRXZcppYv8BbO3c3t7+9gxOMr/CKNc+4f4rKc+RdZymb9aEX1MarwuI/9tlXz8yzfhKURPSV4FfM/W/6Yd56/Fc98P/Dk3+fe3+Dqb2d+PVGnCN8rzGNpTgbU4uC8Dn/znoD9yIzlNKb2Z+Pl8TCmdNHRM36eUfgz8/jVel5H/tko+/sX3+bnQ91rXH4PfmB/9w7eFFv+mvcr/fo83mE6V8iWl9CHH1vVEj2Ep+u/Hwk7w908DPY+hWeTetqmnV6mRx8D8HPudb+UkT9N+zh/SpoqrhcOU0k85mN8HnxmBZgistkVOEFfVwmNgfky3N/Mqh8xPOWxaspunLkKLWRBY7WppcjTVOhzm67Xf/Vr28im4n4PXV5WwDK0LIc3IBFa7WooapwmZgtOEq1lOrXqL0v0chB8aeCxQnMBqV0uBZYLFFEw3nneSI2XKNVbb+j5f+OGUIUMRWO0SWMydCdbTTvNaqxG8FFmMRmC1S2Axd/tOTz+qhS1cSjsUWYxEYLWrpYWqrS+aZVymWN96N2BcLYkshiGw2tTi2hPrYZiCwPq9xfH455YeUIDDPKGDrgmsNrV4Ss5pQqbw0jTj7/ZmFB6v86QOuiWw2tTiuhNrYZiK6elXp51fLbiu9/7u0DOB1SYTLPiN04Rfj8HcNl/ddaqQngmsNrUYM26Zw1RMsOa7GedLv396JbDac9DwaQDjeqawP/MJ6snMr+R938BjgLUJrPa0HDECi6nM+TTh3APDFIsuCaz2tPyHxB85pjLXwHplH7pfnTTwGGAtAqs9LZ8KsdCdqRzOdLsGYfHVG9t10BuB1R6nCOFhc5ti7U20Y/vnlNIPKaU/pZT+kFLaufP1x5TSn1NKf00pXVV+XK4mpSsCqz2HHhs8aG6nqGs/3085oF7lqxYXt6y5vvffuUwpneVNQA9yhH2p9PgEFl0RWG3p4Q3EOiymMrc32JrP923+eZdr/u/O89KBj0GP66657QNG5wRWW3o4Bec0IVPZnVng13qubwts6HlSKbJ8wKMbAqstAgueNpcp1l6lqwf/UnC39JMKpwsFFt0QWG1xihCeNpfXX40rdm8CdoiPvkGzK5nphsBqS8k/HjdBV/n4A8eUDmcyRa0Rkh8eWMS+rfPgKZYJOt0QWO3YK3yLnIsNFqyuYtd+NExsDlOsGv/Gom6kHHmDZlcy0w2B1Y7Sk6GL/GkygikWU5rDOqzof2NXQR/AUuDfnSUf8OiCwGpH6U/l1wHj/yXrsJiSy/W3d9Hp904+4NELgdWO0msLzgP/iFoHwdRGn2JF/xuLjqDPwd8fmiew2lH6D+p14B9RnyCZ2uhTVDd4hs4JrHa8LPxILgJPEVpoytTcNmW+rMGiCwKrDaUnQncvk44a1ZtiMaV9p6pny98euiCw2hBxenAp6kohb25MzRQLaJbAakPpT2R3L5OOCiyfIpmawAKaJbDaUHrB7t2oilrobqsGpvbSehygVQKrDaVPt10+8n+X5BQhLRD6QJME1vQi7pp/8cj/XdK+6QENcJoQaJLAml7ptUw3D2zPEHXzVeuwmJoJFtAkgTW9iHsQ3he1H5bAYhM3BY/avtch0CKBNb3I9VdLUTdftQ6LTZR+PTpNCDRHYE2v9KfvhwLLVg20ZDFlvSr4eAQW0ByBNb3St8h5aDoQFVilHzvzcVbwmR664AJojcCaVsQptofWW0XeOd9pQjbhNCEwNIE1rYhTbI8tci+5sPgupwnZRMkJVnI1IdAagTWtyJs83xc1xRJYbOpTwSNnggU0RWBNq3ScPLUdg8CiNSVPE+6aYgEtEVjTKr1+6ak3LHth0ZrSpwlNsYBmvPCrmNRh4R/+VEQt4uvHgCdb+jY/zMdlPq1d6t+BCVY73gVe2Rl1VTQUJbCmE/Fm8NRpwMg/Sq8CNzNlbOcFA+swT4W9AU8v8spl6IJThNOJ2N5gqsCyVQObcjUhMCSBNZ2ItUvPrbNy02dac154CxHrsIAmCKzplI6Szyv8d9wyhxaVnGK99hsGWiCwplPjHoT32aqBFtnVHRiOwJrGQd63p6RVAitqgrVrHRZbsA4LGI7AmkbtBe5LFrrTouvC6wNNsIDJCaxpRHzCXiWeIrdSMDVgGyWnWPuCH5iafbCmMdUEa+EqaHNQb2hs46zwRriLKdYHvxEmUOPDpr+3HRBY0yi9KPxqjf/uZVBgWejONi4Kx/8rgcVEfnbgSU4RTqb0LXLWWVsVdSVh6efE/JQ8hf068FYtAM8SWPVFTHrWeWOKXOhuisU2XE0IDENg1TfFDu53Rd4jTGCxDfthAcMQWPVNucA92aqBhi0+KHwq+PBMsIDJCKz6ptqiYZP/7rq8obGtklOsfVNVYCoCq76IKc+60bTKfQs34c2MbVmHBQxBYNW1F7BFwiaxtM6arXXsunKLLV2uue3Ic078QoApCKy6pl7gvmShOy0rOcU6FP3AFARWXRHxsUksCSxa5mpCoHsCq65WAsteWLRsMcG6Kfj4rMMCqhNYdUUscG/tFKGtGiih5BTLBAuoTmDV9TLgp236RlRyIfFdEc+R+Sm5DmvXZBWoTWDVE/EHfptIcpqQlpVeh+VqQqAqgVVPC/tf3VX6DewupwnZ1uK1/aXgUbQOC6hKYNXTygL3pai9sJIJFoWU3q5B+APVCKx6IqJjmwmWrRponV3dgW4JrHpam2AJLFp3UXi7BlcTAtUIrHpK3yInbTnBui785nVXxHNlnkpOsUywgGoEVh1Rf9i3vRIwcorlzYwSSm/XYIoFVCGw6og4ZbbJTZ7vs1UDrSt9tavwJ9pOha+/+C22T2DV0coO7vdFBpYrtijhutCHiSUTLKAKgVVHawvclyL3wjLBopSSpwn3xT9Qg8Cqo7UtGpYi98JyyxxKKf1BwBQLCCew4h3kxbWllQisyEXuyaSAQi4K3zvTOiwgnMCKFxUZpT7Vl7wdyX0Ci1JKniZ87bcCRBNY8SI+LZfcvyryNKFJAaVErhcEKE5gxWt1gfuShe70oPRtcwBCCax4EafJSgaWrRroxSe/KaAXAiveYcBPKHlaLzKwIp4782WKBXRDYMWKWoNU8rRe9NoW67AoxTosoBsv/KpCRZ0iKz11ugnaSiI5TUhBl/mqV5PR9p0EX0EttmmewIrVS2BdBG4MaqE7JZ0LrC6cBG82LLBonlOEsSJOj0XsWxW54ajAoiTrsIAuCKxYrd4i577IvbAEFiWdF94HDiCEwIqzF7SuKWLaFDlu383HAkoxxQKaZw1WnKjJzUnAqcfoADqyZoKCFq+lNw4o0DKBFSdqe4L9/NWTVwKLghYTrJ8cUKBlThHGsT3BbxwLSroOvkk5wNYEVhyLu3/jWFDaqSMKtExgxbFXz28cC0pzyhlomsCKYWLzLceEkhZX0145okCrBFYMa46+5ZhQmikW0CyBFcO05luOCaXZDwtolsCKEbVFQ88cE0ozwQKaJbBiOB32LceE0hbbNXxyVIEWCazy9jrcCLSGfbfMIYApFtAkgVWetUaPc2wozTosoEkCqzwR8TjHhtIubdcAtEhglWet0eMEFhFMsYDmCKzyRMTjxCcRBBbQHIFV3svRnlBBPRwbC/H7s1jofjP3gzAj13M/APRBYJVlQvO81o+R+yb2ydWE83Ex9wNAHwRWWU4PPs8xij0Gc33zcZoQaIrAKks8PG/bY1RjUhF9mnA38HvP9fTJaBOsLw08hm041c7svZj7ASgsKrA+5svRa/mxw2NU0lHgG7YIj3GZo2SUU7zRoRx966rI34M1WHRBYJUV9eb5vnJgnQTuRr/tMapxHF51HFhzXot0JrBWFvk6jI43a7DoglOEZUVFSc24iv552x6jGsfiuNPvnWb+6X6kdVjREbEbGFmRr3FXi9INgVVO1Ke2KdZiRP9x3/ZYRR+Tw6CrHRff83XA971rzp/uLwZ6A67xQeJd0PeNDCzTK7ohsMqJ2n5giolE9M/c9ljV+CP7PuB7Rr2hLfW+MLqEUaZYNV7jbwL+bkUuL0gCi54IrHKixu1TrKmJ/pnbHqtabz4lp5KL5/x9we/3EG8+AmtdpwW/1yLWPgQ/Xq9xuiGwyokKrNrrr2r8zB62akj5zbrE7zXyqsS7bLY51jH4XOFnvCwUWXv530vkFiTJa5yeTHkV4UHQaZhSztf8xyywVldignUVfCoi5TeL83xqb9M3oeP8v41+40nefH51ncNkhFtWnVV6HstThScb/tt/lV/j0f8eryb6ewgbmTKw9oP3Wyph1Tesg8A30KlG4pF7Cu3mY7bNH8vz/MYQbfFYf8pvPqf5TW+VNWrHOcxqvdF/8ebzd7XCJFrNYH6Z/9ac5q9V/u4c538X0RduLNmtn67YB6uMqAXuNxNedn8ZvKfQtoF1Vimwll7mr5/yhOTygce/l6dzU7y5l1xL07tRJnm1JrVLu3md4Pf55148EFrL1/hRpansXV7jdEVglRG1RcOUCzovgj+ZbruZ51nlN5+7XjY4IfHp/je1wyTS6UST/v38VWs69ZwrC9zpjUXuZURNsKY85dP6OqzkE+3ffXJ68BujBKfX+FeOA90RWGWMtMC91s8uEaUf7Oz8q+hL43s0ymnCy3wv0jm78RqnRwKrjKi1SlO+SUT/7BLH7Non21/Xg7l68FsjnTJt+WrrGj64wTM9Eljbi7xp6tR/VKKnQyWO3fuZT7Hm/ub7lE/tPrS1zHmKZXpFtwTW9iIDa+pFndE/v8Sxu55xZHw0vXrSaFOsOX6QeG96Ra8E1vaiFri3cF+56MAqdew+zPA+fDcV7m3Yu5Hi83KGHyS+mF7RM4G1vagtGlr41Bb9GEoeu+OZfcI/8cn+WZeDhfeHgU57Pucm/5uGbgms7Y10k+faj6HksbvM0TEHf7Hv1cpGO4V6MpNp7aa37YFmCKzt7AXuZtzCH5foCcluPoalLKLjbfBjntpHC9vXMlqIXuf4GHla+9YHCEYgsLYTucC9hcCqsci+9DE8HfiKq48zmtKVcj5gjFzk0+sjRtZHW68wCoG1nZGvIFyKPh0RcQxPBpxkiavNjTgNGTGy3nqNMxKBtZ2R98Bain4cUcdw8Sn4z4O8Af3gjWcro25lcZGvxO19TdZNjiuTK4YisLYTtUXD51pPYAXRb05RxzDlycVRx29Aixvc/sml6lsbeT3PdX6N/7WBx7KJL3kSJ64YjsDazsug79vS1TPRjyXqGC5d5jegHzqbZv01P24biW7vegZX3r3LMd7L87zJV8MeNbQcAooSWJsbfYH7Uo3HEnkslz7kaVnrC+AXj++P+Q3TPlflzGFCcp7/Lb3N089Wfcz/Fl0Ny9AE1uYiT2219ImuxmOJPJZ3LS9x/0P+9NzKROvmTljZ/yfGnCaBp/nf1NuGJlrLidUfbZLLXLx44nnOfWz73JvcXuBaqZbeYK8rrAkruRfWKpb3L3yfd4tefkXtafaYT3l90FmjbzhRv/spXt8X+XhHvtZa+5t5mr+OctQsXuP7FX/+zZ3Xdyvr4C4bW+O6qVGex9B2bm9v534MYOkovwkd5a+Sb0Y3+Q34/M4X1HaQF5W/yq/xQ69xiCGw4HF7+U1o7846saNnpiDXdyYZl/nrwikRGvbq3mv8YIXT9st48hqHRwgsAIDCLHIHAChMYAEAFCawAAAKE1gAAIUJLACAwgQWAEBhAgsAoDCBBQBQmMACAChMYAEAFCawAAAKE1gAAIUJLACAwgQWAEBhAgsAoDCBBQBQmMACAChMYAEAFCawAAAKE1gAAIUJLACAwgQWAEBhAgsAoDCBBQBQmMACAChMYAEAFCawAAAKE1gAAIUJLACAwgQWAEBhAgsAoDCBBQBQmMACAChMYAEAFCawAAAKE1gAAIUJLACAwgQWAEBhLxzQWXt158kf5K/7zu/858v8BQA8Yef29tbxGd8ipI7y1yKiXm75jK9yaC3i6yJ/CS8AyJ4KrJNHJhqtOL/3OO7/5zlb/N6Oc1i9rnQcrvLv4Cx/1fbq3kQuymkDMfkupbQ38PMD6N5TgXVeYNIxhS/5DeJihtOVk/w19e/tJkfWh3z8a1g8758q/Jwf8vOayiKe/xb4s/+QUrqe8PkBDGHEwHrI1NOVSHt5orH42m3w8X1OKb2vNGG8rnAMvuRTrVNZ/J7/Oehnf8yhCsCW5nIV4X5K6U1K6b/mN+HTSqeTor3L07kfG42rlCP95xxY0WFyGvz9Fw4nPnX+LvB7j/bhA2Ayc9ymYTfH1s85Tnr8xH6UT739c8Nhdd8itP4lT7Oi1AisFBw5TznKHxYiXAksgHLmvg/Wfl63c9HRROtdDpXDBh7LJn7MxztimnWRT+FFO67wMx4SGXa14hRgFuYeWEuHeaL1IfDqrBJOA9ff1HSYTxlGhEqNBej7EwV5ZNgJLICCBNbvfV9prdC69vJ05k1jj2sbu3lNXOlTtGf5KsZotU8tHweeDv5kawaAsgTWtw4bi6y9/Hh6PSX4nJ8Kx8p1pbVEtU8TRgadtVcAhQmsh+02FFmnA8fV0k+Fg6XG6a7dipG1F7hh7I3TgwDlCazHtRBZHyruxD6104LH+jxfFRet1mnCyJ8jrgACCKyn7ebTJ1MsfD/Oa8LmYje/2Zc61jUWu7+u9NqIDKwpd6UHGJbAet7+BJ/y92Y6WTgsuE9WreMXfZrwKPAU8ReL2wFiCKzVvK58Wf6HjjYQLe37QqcKr/PVcdGiNx01vQLokMBaXa2JyNFg2zFsotQb/wi3zomakN24ehAgjsBa3X6lRWXulI8AAA3LSURBVM2mCl9vq1NiYnjW+WL348Bb45zlKR8AAQTWeiLvo5fy9Opl8M/oRU9rsSIDK4qQBwgksNYTfYuUqW4i3KKXhdZi1Qis/YDtPPYCTxVf5TsDABBEYK0valqxN+FNhJcWb7yf73zVuOXMU0oE52V+PtFKvy5MrwA6tnN7e/vYoz93uupBN0F7H53kHc1r+pInPOdPTDT28tTuVX6MNa9uLHWsaxzb0q+Li8DtGf5g/RVArCkD62bD0xQtRN+f8vEp6aziru1XOTrWfQ57ear0Y9DjekipY31dIQ7/XOjKvMVViX8r8H0e8nGCG1UDzM6LCZ/wxRbrmZZTleP8VXvPqFcBgVUrrj7mSNpkgnGdF5+f5edf47gfFzrWpxV2xj8uFFhu7AzQuV7XYF3nN4qT/Gn/r5V/fumF7rU2Mf2cj9m2p4e2ieN1lfo5NdYdvSl4SjPClcACqGOERe7XeSLztuLPLH2askas3BReOL2IrB8Kfr/HlFqHdJnXnEXb9hi/Ctz7yo2dASoZ6SrC08qRVXL37tKX+D/kQ8DC5g+VNvLsaYq1bWBFnh4UWACVjLZNw2ml+8+lzgLrJjAuakRLqeNzVmHriddbvjaitmf45MbOAPWMuA9Wrc06S0ZR1CmhpfPAy/JrrOkpFbPXlR7vppEUuQ2GtVcAFY0YWLXW2pTa86jG6cHSVzzeVeN4lzxGNSZum57mi7yxs9ODABWNupN7T28mEZuW3hd9W5SebrtyUWHd2OEGUXgQuFWHuAKobNTAipzYLJVaeF0jsKKPR/TantJXbbY4xXJrHICBjBpYPU1UapwijNbbbVdqTHTWDaaotYNfLG4HqG/kmz3X2D6Ar3oK2pSD8GPwz9hfY8p5FHihg+kVwARGDiyf2nlKjavqVj1NGLX31Y2rBwGmMXJgwVPOKkw5Vz1NGBVYZx2evgUYgsBizqLXYu2uEE+RNyt3ehBgIgKLOWthsXvU9OpLh2vjAIYhsJizywq3Vnr9xFYce/a+AhiTwGLuprx1jhs7AwxKYDF3pxVuAP3YHldRgfXR4naAaQksiJ/2HD5ww+qD/P8fwfQKYGICC6a5dU7Uzu1XlW4VBcATBBZ8Xez+Jfg43A+sqHsPml4BNEBgbc4l8GOJnmLt37nv5HHgrXEEFkADBNbmLCIey1mFxe7LKVbU9OqTW0QBtEFgwVfXFbZsOMl7Xzk9CDA4gbU5C4nHE32acDdHUMStcdzYGaAhIwfW0Qr/nW04RTieiwo3gLZzO8AMjBpYe4E30F2yyH1Mvd4g2Y2dARoyamC9Cv7+n4O/P9PpcRL02eJ2gLaMGlhRi4iXTK/GdZ1vNdMTpwcBGiOwNmOB+9h6WixucTtAg0YMrHfB66+8oY3vrMJi91LOXHAB0J7RAmuxuP198M8QV/PQy2k3i9sBGjRSYO3lU3fRVw9a7zIPPfyev1gPCNCmUQJrGVeHwT/ns/VXs3GZbz3TMrEP0KgRAuskf4qPjqtU4fQjbWn9dLDAAmhUr4F1lBezL6YMP6WU9iv8TNOr+TmtcAPoTX20uB2gXS8mfGQHa06ElpuHHlVYZ3XfTZ6UMT+LyPq+wWdtegXQsCkDazF1+rGTF8d7O2XP1ocGA+vKNBWgbSPf7LmUjy6Fn7XLfLVeS0yvABonsJ720alBGgxsgQXQOIH1OHHF0llDi90/OV0N0D6B9bAfxBV3XDe0ZYPpFUAHBNbvLdba/KM1VzyghdeE+2ACdEJgfbW4Kutt3gLCrUd4yEUDN4A2vQLoxNwD63MOqwNvXqxg6imWySpAJ+YeWAd3vuA5U0b4Z4vbAfox98Babnb6t7y25dUK/xvm6zpfXToFE1aAjsw9sO56nVL6Oe+QbaLFY6YIHYvbATojsL71Mk+01rlPIvOx53cNwHME1uN+zNMsb6jcNcX+aIubmx/7LQD0Q2A97aXI4o6DfCp5Cu/8IgD6IbCedyiyyKacIh3mfdoA6IDAWo3IIjUwRXL7JoBOCKzVHdrocdZe5W09piSwADohsNbzxmLj2WohbnZFFkAfBNb6Tp0qnJ29HNctEFgAHXgx4UO82eLGyi8LP5Z17Oa1OPbJmo+WppYv89WMbpsD0LApA+tiy1vT7OX//av8qX634GN7zru8Huu64s9kOq1tkfDOtg0Abev5FOF1vn3Iuxxbb/NUrAZrYebjKF/g0BLrAAEaN9IarNN86uRzpZ9ngjAPLf6e90UWQNtGW+R+nU8Zfqrws/Zt/Di8vYZDxgQVoGGjXkW4ePO5qvRzGNdx5bV963idJ7YANGjUwLqudJXfNov0aV/rAe00IUCjRt4H67TCFOvQnljDOph4O5BVWAcI0KjRNxqtcWsb67DG1EO87JuiArRp9MA6q/AzvMGNqZf1ddYBAjRo9MC6rHCa0ELj8bS8uP2+N05TA7RnDvcijL6liMAaT29TIVMsgMbMIbDOg7+/wBrLQd4CoScCC6AxcwisaPtjP73Z6TFWDl1sAdCWOQTWRQOPgX70Og2yZQNAQ+YQWNcNPAb6cBw0kbzKNyOPdGyxO0A7nCIsw+mZMUTtjH5WYcuQXTu7A7RDYJVhctC/vbzlQYTTPEmNvgm5xe4AjRBY8FVUnHy5sw7wNPhYv3RVK0AbBBZ8FbVI/G5ULU4T3gQfb4vdARogsODrGrqo7TbuT62i12I5TQjQAIEFcVOfTw9cxRp9mnBXZAFMT2Axd3vBVw/ed17h/piuJgSYmMBi7qJu7HzzxLQq+jTha4vdAaYlsJi7qNODT0XUhwrH3GlCgAkJLObsKN/HL8JTEXWZt2+IJLAAJiSwmLOoCLla4R6Y0Yvd963FApiOwGLOogJrlVOA0euwksACmI7AYq5Ogha3pxXj6bLCrXPeuI0TwDQEFnMVNb36nONpFTWmWNZiAUxAYDFHB/m+fRHWWVvl1jkAgxJYzFHUVOdmzanUdYUp1mKx+6vgnwHAPXMIrBobLp5X+BmUExVYZw/cGmeV/000pwkBKhNYlHDU0VE8Dryx8yaxdFbp1jkWuwNUNIfAav3N/7n9knrQ05t35N5Xm06joqdYu7ZsAKhLYG1v20XK655S2kT0GpzoKeHnQt/nIN+nL8I2kRS96Wiy2B2grtED6yjwdNDSthOoGoEVHUC9nCKMnOJsc3/BiwqnCQ87O5UL0LXRA6vGp/ZtA6nGKcLICdZe4P38lkodo6jXw5c19r56jBtAAwxk5MA6yDtZRyvx5l9jkXOP33upxJTvVeA0s0QcuZoQYCAjB1aNdS2p0BYN204/nrMb+Ob6Puj73lXiGEfGRYk4uiy41uwxka8DAO4YNbBOA3fqvq/EBKvGPlrvA672O6mwxi0VOMZ7gdPMTwXX0dX4UCCwACoYLbAOcqzUODWY8tqbEm+uNQJrv/A6n6NK64ZKHOPI05glo6jGacKX9oYDiDdCYO3lN9DFG93fKk6uUsEwqrUT/JtCQXCUH/Nuge/1nBLHJmpx+7q3xnnOdZ6IRbNlA0CwFxMe4KMCb54HlU5RPabk9OJT4B5Nd73Jx+1kw7Vf7/LpxhpxlQq8Ro4Cr3KMOKV3WuF1cCyyAGLt3N7ePvYDzitPg3pzVfhUyyJ4fqp8DD7lN/TzZ07DHeWr8N5VDtqbAuvGTgNPGf9j0DYb1xUC9s+VTkkCzNKUE6zelZ5enE0QWK/vTEuuHploTRnZ2wbAXuD6q6vAPczOKqwjPBFYAHEE1uZKL/BeTC0+Vlygf9/+xKdbH7JtxB4HToIiF/h/qPA6eJ0nsNFbhADM0hzuRRjhY9Atbmrt3dWDLwXWX7W+99Vjatw6J7kBNEAcgbW+m8DNNc8rbDbZi20nRAeBpzc/VZj8uAE0QMcE1vo+BL+51tgZvXVfCgRGZDzUWLtUI7D2g+9TCTBbAms9XyoE0HmlvZBaViKOok4P3lSKn8v8eotmZ3eAAAJrdTcV34ze5Z83Rx8LrL2KXNxe88q7GiH3JuAWSgCzJ7BW9y7wsvz7Lme6Puaq8elVqnwhQq2fZYoFUJjAWs3bCa7wO83TnDk5LnB15kHgTuhXFW9rlCreOkdgARQmsJ43RVwtvau0DqcFbwtNCEeZXi3VOCV5mHfrB6AQgfW0KeMq5QnGqxlE1g8Fj/NogXVaaT2eLRsAChJYD1u8of2pkY0/R4+sHwruin4cuBv95wl3Pa8xxTq22B2gHIH1rU95HU/NtTbPWUbWaJuQvi18y5nIncmnjO0agbVrZ3eAcnZub28f+2bnE9/ot7arfHqppbB6yCJIvm/vYa3lJgdjyasyF9OX/xv4mP8QdHukVV1WuFfkZxuPApRhgvU1rN42OLV6zLt8+rLGveoiLCeEpbe8iFx7FXXvyXXUmGK9zL8bALY058D6lEPloMObLJ/nq77+0sBjWdVVPt4ltmJ4SO+3xnlOrdeoxe4ABczpFOFNfk5n+WvqiUQpB/n2PW8afXxX+fFFBsIiNv8l6HtfNTTVuchbKkS6sdgdYHsjT7A+51M7i6vU/jG/aRznN/pR4irltTkneY3QXxo6dbiYEP650oRw9OnVUo0p1q6NRwG299QE66Sj9RiXdy6h72EdVbSj/Pt7VWHicdeniSaE7wKnLqcTbs9w30Gl+LloLCwBuvNUYDGGgxxcRzm4jgrdCPlLDo+LHLXCFgAygTVfy8vxD1acVC4D6rKhiQ4AtCel9P8BnlaDuNlqOG4AAAAASUVORK5CYII=" alt="The Launch Box">
+  </div>
+  <a class="nav on" href="#"><i class="ti ti-layout-dashboard"></i>Dashboard</a>
+  <a class="nav" href="#"><i class="ti ti-bell"></i>Alerts <span class="badge">3</span></a>
+  <a class="nav" href="#"><i class="ti ti-shield-check"></i>Auto-resolved</a>
+  <a class="nav" href="#"><i class="ti ti-ban"></i>Suppressions</a>
+  <a class="nav" href="#"><i class="ti ti-file-text"></i>Reports</a>
+  <div class="sep"></div>
+  <a class="nav" href="#"><i class="ti ti-building"></i>Organizations</a>
+  <a class="nav" href="#" style="margin-top:auto"><i class="ti ti-settings"></i>Settings</a>
+</div>
+<div class="main">
+  <div class="topbar">
+    <div class="topbar-left">
+      <div class="topbar-title">SENTINEL <span>/ Dashboard</span></div>
+      <div class="pill"><span class="dot"></span>Agent online</div>
+    </div>
+    <button class="export-btn" onclick="window.print()"><i class="ti ti-download" style="font-size:13px"></i>Export PDF</button>
+  </div>
+  <div class="content">
+    <div class="metrics">
+      <div class="metric">
+        <div class="metric-label">Total today</div>
+        <div class="metric-value" id="m1">0</div>
+        <div class="metric-sub">across all orgs</div>
+        <div class="metric-bar"><div class="metric-bar-fill" style="width:0%;background:#fff" id="b1"></div></div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Auto-resolved</div>
+        <div class="metric-value g" id="m2">0</div>
+        <div class="metric-sub">77% of total</div>
+        <div class="metric-bar"><div class="metric-bar-fill" style="width:0%;background:#00FFEE" id="b2"></div></div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Escalated</div>
+        <div class="metric-value r" id="m3">0</div>
+        <div class="metric-sub">confirmed threats</div>
+        <div class="metric-bar"><div class="metric-bar-fill" style="width:0%;background:#FF3300" id="b3"></div></div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Pending review</div>
+        <div class="metric-value o" id="m4">0</div>
+        <div class="metric-sub">need human input</div>
+        <div class="metric-bar"><div class="metric-bar-fill" style="width:0%;background:#FF6600" id="b4"></div></div>
+      </div>
+    </div>
+    <div class="row2">
+      <div class="section">
+        <div class="section-header">
+          <div class="section-title">ALERTS THIS WEEK</div>
+        </div>
+        <div class="chart-wrap">
+          <canvas id="weekChart"></canvas>
+        </div>
+      </div>
+      <div class="section">
+        <div class="section-header">
+          <div class="section-title">RESOLUTION BREAKDOWN</div>
+        </div>
+        <div class="chart-wrap" style="display:flex;align-items:center;justify-content:center">
+          <canvas id="donutChart" style="max-width:160px;max-height:160px"></canvas>
+        </div>
+      </div>
+    </div>
+        <div class="section">
+      <div class="section-header">
+        <div class="section-title">ALERT LOG</div>
+        <div class="filter-row">
+          <div class="fp on" onclick="filterAlerts('all',this)">All</div>
+          <div class="fp" onclick="filterAlerts('auto',this)">Auto</div>
+          <div class="fp" onclick="filterAlerts('review',this)">Review</div>
+          <div class="fp" onclick="filterAlerts('escalate',this)">Escalate</div>
+        </div>
+      </div>
+      <div class="alert-row" data-type="auto"><div class="icon-box auto"><i class="ti ti-circle-check"></i></div><div class="alert-info"><div class="alert-name">Linux Proxy usage — zsh (Codex CLI)</div><div class="alert-host">KaiBook-Pro.local · Improv</div></div><div class="dec auto">AUTO</div><div class="alert-time">12:52</div><button class="act-btn">View</button></div>
+      <div class="alert-row" data-type="escalate"><div class="icon-box esc"><i class="ti ti-alert-triangle"></i></div><div class="alert-info"><div class="alert-name">TR/Mediyes.Gen — aimgr.exe</div><div class="alert-host">desktop-9l7b1kk · Improv</div></div><div class="dec esc">ESCALATE</div><div class="alert-time">01:00</div><button class="act-btn">Review</button></div>
+      <div class="alert-row" data-type="auto"><div class="icon-box auto"><i class="ti ti-circle-check"></i></div><div class="alert-info"><div class="alert-name">Suspicious Keyring Activity — gh CLI</div><div class="alert-host">KaiBook-Pro.local · Improv</div></div><div class="dec auto">AUTO</div><div class="alert-time">12:33</div><button class="act-btn">View</button></div>
+      <div class="alert-row" data-type="escalate"><div class="icon-box esc"><i class="ti ti-alert-triangle"></i></div><div class="alert-info"><div class="alert-name">PHISH/HTML.Agent.EMW — voicemail campaign</div><div class="alert-host">hbrconcierge · Client org</div></div><div class="dec esc">ESCALATE</div><div class="alert-time">08:42</div><button class="act-btn">Review</button></div>
+      <div class="alert-row" data-type="review"><div class="icon-box rev"><i class="ti ti-eye"></i></div><div class="alert-info"><div class="alert-name">Tool Download — curl HTTP check</div><div class="alert-host">KaiBook-Pro.local · Improv</div></div><div class="dec rev">REVIEW</div><div class="alert-time">11:17</div><button class="act-btn">Triage</button></div>
+      <div class="alert-row" data-type="auto"><div class="icon-box auto"><i class="ti ti-circle-check"></i></div><div class="alert-info"><div class="alert-name">Linux User Added to Privileged Group — bash</div><div class="alert-host">debian-kay · The Launch Box</div></div><div class="dec auto">AUTO</div><div class="alert-time">07:55</div><button class="act-btn">View</button></div>
+      <div class="alert-row" data-type="escalate"><div class="icon-box esc"><i class="ti ti-alert-triangle"></i></div><div class="alert-info"><div class="alert-name">TR/W32.Malware — ConvertPDF_982126.exe</div><div class="alert-host">desktop-enkvknu · Client org</div></div><div class="dec esc">ESCALATE</div><div class="alert-time">03:30</div><button class="act-btn">Review</button></div>
+      <div class="alert-row" data-type="auto"><div class="icon-box auto"><i class="ti ti-circle-check"></i></div><div class="alert-info"><div class="alert-name">Build Docker Image — polly-tlb</div><div class="alert-host">debian-kay · The Launch Box</div></div><div class="dec auto">AUTO</div><div class="alert-time">15:25</div><button class="act-btn">View</button></div>
+      <div class="alert-row" data-type="escalate"><div class="icon-box esc"><i class="ti ti-alert-triangle"></i></div><div class="alert-info"><div class="alert-name">PHISH/Agent — PO_AE20250333.html</div><div class="alert-host">hbrconcierge · Client org</div></div><div class="dec esc">ESCALATE</div><div class="alert-time">08:41</div><button class="act-btn">Review</button></div>
+    </div>
+    <div class="section">
+      <div class="section-header">
+        <div class="section-title">SUPPRESSION RULES CREATED BY AGENT</div>
+        <span style="font-size:10px;color:#444">auto-created · active</span>
+      </div>
+      <div class="sup-row"><div class="active-dot"></div><div class="sup-name">SENTINEL - Linux Proxy usage / codex-aarch64-apple-darwin</div><div class="sup-scope">Improv · KaiBook-Pro</div><div class="sup-date">Aug 5</div></div>
+      <div class="sup-row"><div class="active-dot"></div><div class="sup-name">SENTINEL - Suspicious Keyring Activity / gh</div><div class="sup-scope">Improv · KaiBook-Pro</div><div class="sup-date">Aug 5</div></div>
+      <div class="sup-row"><div class="active-dot"></div><div class="sup-name">SENTINEL - Tool Download / zsh</div><div class="sup-scope">Improv · KaiBook-Pro</div><div class="sup-date">Aug 5</div></div>
+      <div class="sup-row"><div class="active-dot"></div><div class="sup-name">SENTINEL - Build Docker Image on Host / bash</div><div class="sup-scope">The Launch Box · debian-kay</div><div class="sup-date">Aug 4</div></div>
+      <div class="sup-row"><div class="active-dot"></div><div class="sup-name">SENTINEL - Linux User Added to Privileged Group / bash</div><div class="sup-scope">TLB · debian-kay</div><div class="sup-date">Aug 4</div></div>
+      <div class="sup-row"><div class="active-dot"></div><div class="sup-name">SENTINEL - File Marked Executable with chmod / bash</div><div class="sup-scope">Improv · KaiBook-Pro</div><div class="sup-date">Aug 5</div></div>
+    </div>
+      <div class="alert-row"><div class="icon-box auto"><i class="ti ti-circle-check"></i></div><div class="alert-info"><div class="alert-name">Linux Proxy usage — zsh (Codex CLI)</div><div class="alert-host">KaiBook-Pro.local · Improv</div></div><div class="dec auto">AUTO</div><div class="alert-time">12:52</div><button class="act-btn">View</button></div>
+      <div class="alert-row"><div class="icon-box esc"><i class="ti ti-alert-triangle"></i></div><div class="alert-info"><div class="alert-name">TR/Mediyes.Gen — aimgr.exe</div><div class="alert-host">desktop-9l7b1kk · Improv</div></div><div class="dec esc">ESCALATE</div><div class="alert-time">01:00</div><button class="act-btn">Review</button></div>
+      <div class="alert-row"><div class="icon-box auto"><i class="ti ti-circle-check"></i></div><div class="alert-info"><div class="alert-name">Suspicious Keyring Activity — gh CLI</div><div class="alert-host">KaiBook-Pro.local · Improv</div></div><div class="dec auto">AUTO</div><div class="alert-time">12:33</div><button class="act-btn">View</button></div>
+      <div class="alert-row"><div class="icon-box esc"><i class="ti ti-alert-triangle"></i></div><div class="alert-info"><div class="alert-name">PHISH/HTML.Agent.EMW — voicemail campaign</div><div class="alert-host">hbrconcierge · Client org</div></div><div class="dec esc">ESCALATE</div><div class="alert-time">08:42</div><button class="act-btn">Review</button></div>
+      <div class="alert-row"><div class="icon-box rev"><i class="ti ti-eye"></i></div><div class="alert-info"><div class="alert-name">Tool Download — curl HTTP check</div><div class="alert-host">KaiBook-Pro.local · Improv</div></div><div class="dec rev">REVIEW</div><div class="alert-time">11:17</div><button class="act-btn">Triage</button></div>
+    </div><div class="alert-row" data-type="auto"><div class="icon-box auto"><i class="ti ti-circle-check"></i></div><div class="alert-info"><div class="alert-name">Linux User Added to Privileged Group — bash (Cursor)</div><div class="alert-host">debian-kay · The Launch Box</div></div><div class="dec auto">AUTO</div><div class="alert-time">07:55</div><button class="act-btn">View</button></div>
+<div class="alert-row" data-type="escalate"><div class="icon-box esc"><i class="ti ti-alert-triangle"></i></div><div class="alert-info"><div class="alert-name">TR/W32.Malware — ConvertPDF_982126.exe</div><div class="alert-host">desktop-enkvknu · Client org</div></div><div class="dec esc">ESCALATE</div><div class="alert-time">03:30</div><button class="act-btn">Review</button></div>
+<div class="alert-row" data-type="auto"><div class="icon-box auto"><i class="ti ti-circle-check"></i></div><div class="alert-info"><div class="alert-name">Build Docker Image — polly-tlb (Cursor)</div><div class="alert-host">debian-kay · The Launch Box</div></div><div class="dec auto">AUTO</div><div class="alert-time">15:25</div><button class="act-btn">View</button></div>
+<div class="alert-row" data-type="escalate"><div class="icon-box esc"><i class="ti ti-alert-triangle"></i></div><div class="alert-info"><div class="alert-name">PHISH/Agent — PO_AE20250333.html</div><div class="alert-host">hbrconcierge · Client org</div></div><div class="dec esc">ESCALATE</div><div class="alert-time">08:41</div><button class="act-btn">Review</button></div>
+    <div class="section">
+      <div class="section-header">
+        <div class="section-title">SUPPRESSION RULES CREATED BY AGENT</div>
+        <span style="font-size:10px;color:#444">auto-created · active</span>
+      </div>
+      <div class="sup-row"><div class="active-dot"></div><div class="sup-name">SENTINEL - Linux Proxy usage / codex-aarch64-apple-darwin</div><div class="sup-scope">Improv · KaiBook-Pro</div><div class="sup-date">Aug 5</div></div>
+      <div class="sup-row"><div class="active-dot"></div><div class="sup-name">SENTINEL - Suspicious Keyring Activity / gh</div><div class="sup-scope">Improv · KaiBook-Pro</div><div class="sup-date">Aug 5</div></div>
+      <div class="sup-row"><div class="active-dot"></div><div class="sup-name">SENTINEL - Tool Download / zsh</div><div class="sup-scope">Improv · KaiBook-Pro</div><div class="sup-date">Aug 5</div></div>
+      <div class="sup-row"><div class="active-dot"></div><div class="sup-name">SENTINEL - Build Docker Image on Host / bash</div><div class="sup-scope">The Launch Box · debian-kay</div><div class="sup-date">Aug 4</div></div>
+    </div><div class="sup-row"><div class="active-dot"></div><div class="sup-name">SENTINEL - Linux User Added to Privileged Group / bash</div><div class="sup-scope">TLB · debian-kay</div><div class="sup-date">Aug 4</div></div>
+<div class="sup-row"><div class="active-dot"></div><div class="sup-name">SENTINEL - File Marked Executable with chmod / bash</div><div class="sup-scope">Improv · KaiBook-Pro</div><div class="sup-date">Aug 5</div></div>
+  </div>
+</div>
+<script>
+function filterAlerts(type, btn) {
+  document.querySelectorAll('.fp').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  document.querySelectorAll('.alert-row').forEach(row => {
+    if (type === 'all' || row.getAttribute('data-type') === type) {
+      row.style.display = 'flex';
+    } else {
+      row.style.display = 'none';
+    }
+  });
+}
+window.addEventListener('load', () => {
+  function animateCount(el, target, duration) {
+    let start = 0;
+    const step = target / (duration / 16);
+    const timer = setInterval(() => {
+      start += step;
+      if (start >= target) { start = target; clearInterval(timer); }
+      el.textContent = Math.floor(start);
+    }, 16);
+  }
+  function animateBar(el, width, delay) {
+    setTimeout(() => { el.style.width = width + '%'; }, delay);
+  }
+  animateCount(document.getElementById('m1'), 31, 800);
+  animateCount(document.getElementById('m2'), 24, 1000);
+  animateCount(document.getElementById('m3'), 4, 600);
+  animateCount(document.getElementById('m4'), 3, 600);
+  animateBar(document.getElementById('b1'), 100, 200);
+  animateBar(document.getElementById('b2'), 77, 300);
+  animateBar(document.getElementById('b3'), 13, 400);
+  animateBar(document.getElementById('b4'), 10, 500);
+  const weekCtx = document.getElementById('weekChart').getContext('2d');
+  new Chart(weekCtx, {type:'bar',data:{labels:['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],datasets:[{label:'Auto',data:[18,22,15,24,19,8,5],backgroundColor:'#00FFEE30',borderColor:'#00FFEE',borderWidth:1,borderRadius:4},{label:'Escalate',data:[2,3,1,4,2,0,1],backgroundColor:'#FF330030',borderColor:'#FF3300',borderWidth:1,borderRadius:4},{label:'Review',data:[1,2,3,3,1,0,0],backgroundColor:'#FF660030',borderColor:'#FF6600',borderWidth:1,borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#555',font:{size:10}}}},scales:{x:{stacked:true,grid:{color:'#1a1a1a'},ticks:{color:'#555',font:{size:10}}},y:{stacked:true,grid:{color:'#1a1a1a'},ticks:{color:'#555',font:{size:10}}}}}});
+  const donutCtx = document.getElementById('donutChart').getContext('2d');
+  new Chart(donutCtx, {type:'doughnut',data:{labels:['Auto','Escalate','Review'],datasets:[{data:[24,4,3],backgroundColor:['#00FFEE40','#FF330040','#FF660040'],borderColor:['#00FFEE','#FF3300','#FF6600'],borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{color:'#555',font:{size:10},padding:10}}},cutout:'70%'}});
+});
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
