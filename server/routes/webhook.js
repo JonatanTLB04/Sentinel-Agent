@@ -3,6 +3,7 @@ const router = express.Router();
 const { triageAlert } = require("../lib/triage");
 const { notify } = require("../lib/notifier");
 const { acknowledgeAlert, addComment, createSuppressionRule } = require("../lib/edr-connector");
+const { addAlert } = require("../lib/store");
 
 router.post("/edr", async (req, res) => {
   const secret = req.headers["x-sentinel-secret"];
@@ -13,7 +14,7 @@ router.post("/edr", async (req, res) => {
   try {
     const result = await triageAlert(alert);
     notify(alert, result);
-
+    addAlert(alert, result.decision, result.reason);
     if (alert.messageId) {
       if (result.decision === "auto_resolve") {
         await addComment(alert.messageId, `[SENTINEL AUTO-RESOLVED] ${result.reason}`);
@@ -33,7 +34,6 @@ router.post("/edr", async (req, res) => {
         await addComment(alert.messageId, `[SENTINEL REVIEW NEEDED] ${result.reason}`);
       }
     }
-
     res.status(200).json({ received: true, decision: result.decision });
   } catch (err) {
     console.error("Triage error:", err.message);
