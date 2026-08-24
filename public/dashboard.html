@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SENTINEL — The Launch Box</title>
+<title>SENTINEL Ã¢â‚¬â€ The Launch Box</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <link rel="stylesheet" href="dashboard.css">
@@ -42,11 +42,11 @@
         <div class="section"><div class="section-header"><div class="section-title">ALERTS THIS WEEK</div></div><div class="chart-wrap"><canvas id="weekChart"></canvas></div></div>
         <div class="section"><div class="section-header"><div class="section-title">RESOLUTION BREAKDOWN</div></div><div class="chart-wrap" style="display:flex;align-items:center;justify-content:center"><canvas id="donutChart" style="max-width:160px;max-height:160px"></canvas></div></div>
       </div>
-      <div class="section">
+      <div class="section" id="recent-alerts-section">
         <div class="section-header"><div class="section-title">RECENT ALERTS</div></div>
-        <div class="alert-row" data-type="auto"><div class="icon-box auto"><i class="ti ti-circle-check"></i></div><div class="alert-info"><div class="alert-name">Linux Proxy usage — zsh (Codex CLI)</div><div class="alert-host">KaiBook-Pro.local · Improv</div></div><div class="dec auto">AUTO</div><div class="alert-time">12:52</div><button class="act-btn">View</button></div>
-        <div class="alert-row" data-type="escalate"><div class="icon-box esc"><i class="ti ti-alert-triangle"></i></div><div class="alert-info"><div class="alert-name">TR/Mediyes.Gen — aimgr.exe</div><div class="alert-host">desktop-9l7b1kk · Improv</div></div><div class="dec esc">ESCALATE</div><div class="alert-time">01:00</div><button class="act-btn">Review</button></div>
-        <div class="alert-row" data-type="review"><div class="icon-box rev"><i class="ti ti-eye"></i></div><div class="alert-info"><div class="alert-name">Tool Download — curl HTTP check</div><div class="alert-host">KaiBook-Pro.local · Improv</div></div><div class="dec rev">REVIEW</div><div class="alert-time">11:17</div><button class="act-btn">Triage</button></div>
+        <div class="alert-row" data-type="auto"><div class="icon-box auto"><i class="ti ti-circle-check"></i></div><div class="alert-info"><div class="alert-name">Linux Proxy usage Ã¢â‚¬â€ zsh (Codex CLI)</div><div class="alert-host">KaiBook-Pro.local Ã‚Â· Improv</div></div><div class="dec auto">AUTO</div><div class="alert-time">12:52</div><button class="act-btn">View</button></div>
+        <div class="alert-row" data-type="escalate"><div class="icon-box esc"><i class="ti ti-alert-triangle"></i></div><div class="alert-info"><div class="alert-name">TR/Mediyes.Gen Ã¢â‚¬â€ aimgr.exe</div><div class="alert-host">desktop-9l7b1kk Ã‚Â· Improv</div></div><div class="dec esc">ESCALATE</div><div class="alert-time">01:00</div><button class="act-btn">Review</button></div>
+        <div class="alert-row" data-type="review"><div class="icon-box rev"><i class="ti ti-eye"></i></div><div class="alert-info"><div class="alert-name">Tool Download Ã¢â‚¬â€ curl HTTP check</div><div class="alert-host">KaiBook-Pro.local Ã‚Â· Improv</div></div><div class="dec rev">REVIEW</div><div class="alert-time">11:17</div><button class="act-btn">Triage</button></div>
       </div>
     </div>
 
@@ -62,12 +62,12 @@
             <div class="fp" onclick="filterAlerts('escalate',this)">Escalate</div>
           </div>
         </div>
-        <div class="alert-row" data-type="auto"><div class="icon-box auto"><i class="ti ti-circle-check"></i></div><div class="alert-info"><div class="alert-name">Linux Proxy usage — zsh (Codex CLI)</div><div class="alert-host">KaiBook-Pro.local · Improv</div></div><div class="dec auto">AUTO</div><div class="alert-time">12:52</div><button class="act-btn">View</button></div>
-        <div class="alert-row" data-type="escalate"><div class="icon-box esc"><i class="ti ti-alert-triangle"></i></div><div class="alert-info"><div class="alert-name">TR/Mediyes.Gen — aimgr.exe</div><div class="alert-host">desktop-9l7b1kk · Improv</div></div><div class="dec esc">ESCALATE</div><div class="alert-time">01:00</div><button class="act-btn">Review</button></div>
-        <div class="alert-row" data-type="escalate"><div class="icon-box esc"><i class="ti ti-alert-triangle"></i></div><div class="alert-info"><div class="alert-name">PHISH/HTML.Agent.EMW — voicemail campaign</div><div class="alert-host">hbrconcierge · Client org</div></div><div class="dec esc">ESCALATE</div><div class="alert-time">08:42</div><button class="act-btn">Review</button></div>
-        <div class="alert-row" data-type="review"><div class="icon-box rev"><i class="ti ti-eye"></i></div><div class="alert-info"><div class="alert-name">Tool Download — curl HTTP check</div><div class="alert-host">KaiBook-Pro.local · Improv</div></div><div class="dec rev">REVIEW</div><div class="alert-time">11:17</div><button class="act-btn">Triage</button></div>
-        <div class="alert-row" data-type="escalate"><div class="icon-box esc"><i class="ti ti-alert-triangle"></i></div><div class="alert-info"><div class="alert-name">TR/W32.Malware — ConvertPDF_982126.exe</div><div class="alert-host">desktop-enkvknu · Client org</div></div><div class="dec esc">ESCALATE</div><div class="alert-time">03:30</div><button class="act-btn">Review</button></div>
-        <div class="alert-row" data-type="escalate"><div class="icon-box esc"><i class="ti ti-alert-triangle"></i></div><div class="alert-info"><div class="alert-name">PHISH/Agent — PO_AE20250333.html</div><div class="alert-host">hbrconcierge · Client org</div></div><div class="dec esc">ESCALATE</div><div class="alert-time">08:41</div><button class="act-btn">Review</button></div>
+        <div class="alert-row" data-type="auto"><div class="icon-box auto"><i class="ti ti-circle-check"></i></div><div class="alert-info"><div class="alert-name">Linux Proxy usage Ã¢â‚¬â€ zsh (Codex CLI)</div><div class="alert-host">KaiBook-Pro.local Ã‚Â· Improv</div></div><div class="dec auto">AUTO</div><div class="alert-time">12:52</div><button class="act-btn">View</button></div>
+        <div class="alert-row" data-type="escalate"><div class="icon-box esc"><i class="ti ti-alert-triangle"></i></div><div class="alert-info"><div class="alert-name">TR/Mediyes.Gen Ã¢â‚¬â€ aimgr.exe</div><div class="alert-host">desktop-9l7b1kk Ã‚Â· Improv</div></div><div class="dec esc">ESCALATE</div><div class="alert-time">01:00</div><button class="act-btn">Review</button></div>
+        <div class="alert-row" data-type="escalate"><div class="icon-box esc"><i class="ti ti-alert-triangle"></i></div><div class="alert-info"><div class="alert-name">PHISH/HTML.Agent.EMW Ã¢â‚¬â€ voicemail campaign</div><div class="alert-host">hbrconcierge Ã‚Â· Client org</div></div><div class="dec esc">ESCALATE</div><div class="alert-time">08:42</div><button class="act-btn">Review</button></div>
+        <div class="alert-row" data-type="review"><div class="icon-box rev"><i class="ti ti-eye"></i></div><div class="alert-info"><div class="alert-name">Tool Download Ã¢â‚¬â€ curl HTTP check</div><div class="alert-host">KaiBook-Pro.local Ã‚Â· Improv</div></div><div class="dec rev">REVIEW</div><div class="alert-time">11:17</div><button class="act-btn">Triage</button></div>
+        <div class="alert-row" data-type="escalate"><div class="icon-box esc"><i class="ti ti-alert-triangle"></i></div><div class="alert-info"><div class="alert-name">TR/W32.Malware Ã¢â‚¬â€ ConvertPDF_982126.exe</div><div class="alert-host">desktop-enkvknu Ã‚Â· Client org</div></div><div class="dec esc">ESCALATE</div><div class="alert-time">03:30</div><button class="act-btn">Review</button></div>
+        <div class="alert-row" data-type="escalate"><div class="icon-box esc"><i class="ti ti-alert-triangle"></i></div><div class="alert-info"><div class="alert-name">PHISH/Agent Ã¢â‚¬â€ PO_AE20250333.html</div><div class="alert-host">hbrconcierge Ã‚Â· Client org</div></div><div class="dec esc">ESCALATE</div><div class="alert-time">08:41</div><button class="act-btn">Review</button></div>
       </div>
     </div>
 
@@ -75,11 +75,11 @@
     <div id="page-auto" class="page" style="display:none;flex-direction:column;gap:1.25rem">
       <div class="section">
         <div class="section-header"><div class="section-title">AUTO-RESOLVED BY SENTINEL</div><span style="font-size:10px;color:#444">24 today</span></div>
-        <div class="alert-row"><div class="icon-box auto"><i class="ti ti-circle-check"></i></div><div class="alert-info"><div class="alert-name">Linux Proxy usage — zsh (Codex CLI)</div><div class="alert-host">KaiBook-Pro.local · Improv</div></div><div class="dec auto">AUTO</div><div class="alert-time">12:52</div><button class="act-btn">View</button></div>
-        <div class="alert-row"><div class="icon-box auto"><i class="ti ti-circle-check"></i></div><div class="alert-info"><div class="alert-name">Suspicious Keyring Activity — gh CLI</div><div class="alert-host">KaiBook-Pro.local · Improv</div></div><div class="dec auto">AUTO</div><div class="alert-time">12:33</div><button class="act-btn">View</button></div>
-        <div class="alert-row"><div class="icon-box auto"><i class="ti ti-circle-check"></i></div><div class="alert-info"><div class="alert-name">Linux User Added to Privileged Group — bash</div><div class="alert-host">debian-kay · The Launch Box</div></div><div class="dec auto">AUTO</div><div class="alert-time">07:55</div><button class="act-btn">View</button></div>
-        <div class="alert-row"><div class="icon-box auto"><i class="ti ti-circle-check"></i></div><div class="alert-info"><div class="alert-name">Build Docker Image — polly-tlb</div><div class="alert-host">debian-kay · The Launch Box</div></div><div class="dec auto">AUTO</div><div class="alert-time">15:25</div><button class="act-btn">View</button></div>
-        <div class="alert-row"><div class="icon-box auto"><i class="ti ti-circle-check"></i></div><div class="alert-info"><div class="alert-name">Tool Download — curl HTTP check</div><div class="alert-host">KaiBook-Pro.local · Improv</div></div><div class="dec auto">AUTO</div><div class="alert-time">11:06</div><button class="act-btn">View</button></div>
+        <div class="alert-row"><div class="icon-box auto"><i class="ti ti-circle-check"></i></div><div class="alert-info"><div class="alert-name">Linux Proxy usage Ã¢â‚¬â€ zsh (Codex CLI)</div><div class="alert-host">KaiBook-Pro.local Ã‚Â· Improv</div></div><div class="dec auto">AUTO</div><div class="alert-time">12:52</div><button class="act-btn">View</button></div>
+        <div class="alert-row"><div class="icon-box auto"><i class="ti ti-circle-check"></i></div><div class="alert-info"><div class="alert-name">Suspicious Keyring Activity Ã¢â‚¬â€ gh CLI</div><div class="alert-host">KaiBook-Pro.local Ã‚Â· Improv</div></div><div class="dec auto">AUTO</div><div class="alert-time">12:33</div><button class="act-btn">View</button></div>
+        <div class="alert-row"><div class="icon-box auto"><i class="ti ti-circle-check"></i></div><div class="alert-info"><div class="alert-name">Linux User Added to Privileged Group Ã¢â‚¬â€ bash</div><div class="alert-host">debian-kay Ã‚Â· The Launch Box</div></div><div class="dec auto">AUTO</div><div class="alert-time">07:55</div><button class="act-btn">View</button></div>
+        <div class="alert-row"><div class="icon-box auto"><i class="ti ti-circle-check"></i></div><div class="alert-info"><div class="alert-name">Build Docker Image Ã¢â‚¬â€ polly-tlb</div><div class="alert-host">debian-kay Ã‚Â· The Launch Box</div></div><div class="dec auto">AUTO</div><div class="alert-time">15:25</div><button class="act-btn">View</button></div>
+        <div class="alert-row"><div class="icon-box auto"><i class="ti ti-circle-check"></i></div><div class="alert-info"><div class="alert-name">Tool Download Ã¢â‚¬â€ curl HTTP check</div><div class="alert-host">KaiBook-Pro.local Ã‚Â· Improv</div></div><div class="dec auto">AUTO</div><div class="alert-time">11:06</div><button class="act-btn">View</button></div>
       </div>
     </div>
 
@@ -87,19 +87,19 @@
     <div id="page-suppressions" class="page" style="display:none;flex-direction:column;gap:1.25rem">
       <div class="section">
         <div class="section-header"><div class="section-title">SUPPRESSION RULES CREATED BY AGENT</div><span style="font-size:10px;color:#444">6 active</span></div>
-        <div class="sup-row"><div class="active-dot"></div><div class="sup-name">SENTINEL - Linux Proxy usage / codex-aarch64-apple-darwin</div><div class="sup-scope">Improv · KaiBook-Pro</div><div class="sup-date">Aug 5</div></div>
-        <div class="sup-row"><div class="active-dot"></div><div class="sup-name">SENTINEL - Suspicious Keyring Activity / gh</div><div class="sup-scope">Improv · KaiBook-Pro</div><div class="sup-date">Aug 5</div></div>
-        <div class="sup-row"><div class="active-dot"></div><div class="sup-name">SENTINEL - Tool Download / zsh</div><div class="sup-scope">Improv · KaiBook-Pro</div><div class="sup-date">Aug 5</div></div>
-        <div class="sup-row"><div class="active-dot"></div><div class="sup-name">SENTINEL - Build Docker Image on Host / bash</div><div class="sup-scope">The Launch Box · debian-kay</div><div class="sup-date">Aug 4</div></div>
-        <div class="sup-row"><div class="active-dot"></div><div class="sup-name">SENTINEL - Linux User Added to Privileged Group / bash</div><div class="sup-scope">TLB · debian-kay</div><div class="sup-date">Aug 4</div></div>
-        <div class="sup-row"><div class="active-dot"></div><div class="sup-name">SENTINEL - File Marked Executable with chmod / bash</div><div class="sup-scope">Improv · KaiBook-Pro</div><div class="sup-date">Aug 5</div></div>
+        <div class="sup-row"><div class="active-dot"></div><div class="sup-name">SENTINEL - Linux Proxy usage / codex-aarch64-apple-darwin</div><div class="sup-scope">Improv Ã‚Â· KaiBook-Pro</div><div class="sup-date">Aug 5</div></div>
+        <div class="sup-row"><div class="active-dot"></div><div class="sup-name">SENTINEL - Suspicious Keyring Activity / gh</div><div class="sup-scope">Improv Ã‚Â· KaiBook-Pro</div><div class="sup-date">Aug 5</div></div>
+        <div class="sup-row"><div class="active-dot"></div><div class="sup-name">SENTINEL - Tool Download / zsh</div><div class="sup-scope">Improv Ã‚Â· KaiBook-Pro</div><div class="sup-date">Aug 5</div></div>
+        <div class="sup-row"><div class="active-dot"></div><div class="sup-name">SENTINEL - Build Docker Image on Host / bash</div><div class="sup-scope">The Launch Box Ã‚Â· debian-kay</div><div class="sup-date">Aug 4</div></div>
+        <div class="sup-row"><div class="active-dot"></div><div class="sup-name">SENTINEL - Linux User Added to Privileged Group / bash</div><div class="sup-scope">TLB Ã‚Â· debian-kay</div><div class="sup-date">Aug 4</div></div>
+        <div class="sup-row"><div class="active-dot"></div><div class="sup-name">SENTINEL - File Marked Executable with chmod / bash</div><div class="sup-scope">Improv Ã‚Â· KaiBook-Pro</div><div class="sup-date">Aug 5</div></div>
       </div>
     </div>
 
     <!-- REPORTS -->
     <div id="page-reports" class="page" style="display:none;flex-direction:column;gap:1.25rem">
       <div class="section">
-        <div class="section-header"><div class="section-title">ACTIVITY REPORT — AUG 2026</div></div>
+        <div class="section-header"><div class="section-title">ACTIVITY REPORT Ã¢â‚¬â€ AUG 2026</div></div>
         <div style="padding:24px;font-family:Arial,sans-serif;color:#555;font-size:13px;line-height:2">
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
             <div>
@@ -120,10 +120,10 @@
           </div>
           <div style="margin-top:24px;padding-top:24px;border-top:1px solid #1a1a1a">
             <div style="color:#fff;font-size:11px;letter-spacing:1px;margin-bottom:12px">CONFIRMED THREATS</div>
-            <div>TR/Mediyes.Gen (aimgr.exe) — desktop-9l7b1kk · Quarantined by AV</div>
-            <div>TR/W32.Malware (ConvertPDF_982126.exe) — desktop-enkvknu · Quarantined by AV</div>
-            <div>PHISH/HTML.Agent.EMW — hbrconcierge · Voicemail phishing campaign · Quarantined</div>
-            <div>PHISH/Agent (PO_AE20250333.html) — hbrconcierge · Fake PO phishing · Quarantined</div>
+            <div>TR/Mediyes.Gen (aimgr.exe) Ã¢â‚¬â€ desktop-9l7b1kk Ã‚Â· Quarantined by AV</div>
+            <div>TR/W32.Malware (ConvertPDF_982126.exe) Ã¢â‚¬â€ desktop-enkvknu Ã‚Â· Quarantined by AV</div>
+            <div>PHISH/HTML.Agent.EMW Ã¢â‚¬â€ hbrconcierge Ã‚Â· Voicemail phishing campaign Ã‚Â· Quarantined</div>
+            <div>PHISH/Agent (PO_AE20250333.html) Ã¢â‚¬â€ hbrconcierge Ã‚Â· Fake PO phishing Ã‚Â· Quarantined</div>
           </div>
         </div>
       </div>
@@ -136,22 +136,22 @@
         <div style="padding:16px;display:flex;flex-direction:column;gap:12px;font-family:Arial,sans-serif">
           <div style="display:flex;align-items:center;gap:14px;padding:12px 16px;background:#1a1a1a;border-radius:8px">
             <div class="active-dot"></div>
-            <div style="flex:1"><div style="color:#fff;font-size:13px">Improvizations</div><div style="color:#444;font-size:11px;margin-top:2px">27 devices · 18 alerts today</div></div>
+            <div style="flex:1"><div style="color:#fff;font-size:13px">Improvizations</div><div style="color:#444;font-size:11px;margin-top:2px">27 devices Ã‚Â· 18 alerts today</div></div>
             <div style="color:#00FFEE;font-size:11px">Active</div>
           </div>
           <div style="display:flex;align-items:center;gap:14px;padding:12px 16px;background:#1a1a1a;border-radius:8px">
             <div class="active-dot"></div>
-            <div style="flex:1"><div style="color:#fff;font-size:13px">The Launch Box, LLC</div><div style="color:#444;font-size:11px;margin-top:2px">27 devices · 9 alerts today</div></div>
+            <div style="flex:1"><div style="color:#fff;font-size:13px">The Launch Box, LLC</div><div style="color:#444;font-size:11px;margin-top:2px">27 devices Ã‚Â· 9 alerts today</div></div>
             <div style="color:#00FFEE;font-size:11px">Active</div>
           </div>
           <div style="display:flex;align-items:center;gap:14px;padding:12px 16px;background:#1a1a1a;border-radius:8px">
             <div class="active-dot"></div>
-            <div style="flex:1"><div style="color:#fff;font-size:13px">Client org (hbrconcierge)</div><div style="color:#444;font-size:11px;margin-top:2px">1 device · 4 alerts today</div></div>
+            <div style="flex:1"><div style="color:#fff;font-size:13px">Client org (hbrconcierge)</div><div style="color:#444;font-size:11px;margin-top:2px">1 device Ã‚Â· 4 alerts today</div></div>
             <div style="color:#00FFEE;font-size:11px">Active</div>
           </div>
           <div style="display:flex;align-items:center;gap:14px;padding:12px 16px;background:#1a1a1a;border-radius:8px">
             <div style="width:6px;height:6px;background:#333;border-radius:50%;flex-shrink:0"></div>
-            <div style="flex:1"><div style="color:#555;font-size:13px">Echelon Risk and Cyber</div><div style="color:#333;font-size:11px;margin-top:2px">2 devices · 0 alerts today</div></div>
+            <div style="flex:1"><div style="color:#555;font-size:13px">Echelon Risk and Cyber</div><div style="color:#333;font-size:11px;margin-top:2px">2 devices Ã‚Â· 0 alerts today</div></div>
             <div style="color:#333;font-size:11px">No EDR</div>
           </div>
         </div>
@@ -178,29 +178,164 @@ function filterAlerts(type, btn) {
   });
 }
 
+let weekChartInstance = null;
+let donutChartInstance = null;
+
+function initCharts() {
+  const weekEl = document.getElementById('weekChart'); if (!weekEl) return; const weekCtx = weekEl.getContext('2d');
+  weekChartInstance = new Chart(weekCtx, {type:'bar',data:{labels:['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],datasets:[{label:'Auto',data:[0,0,0,0,0,0,0],backgroundColor:'#00FFEE30',borderColor:'#00FFEE',borderWidth:1,borderRadius:4},{label:'Escalate',data:[0,0,0,0,0,0,0],backgroundColor:'#FF330030',borderColor:'#FF3300',borderWidth:1,borderRadius:4},{label:'Review',data:[0,0,0,0,0,0,0],backgroundColor:'#FF660030',borderColor:'#FF6600',borderWidth:1,borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#555',font:{size:10}}}},scales:{x:{stacked:true,grid:{color:'#1a1a1a'},ticks:{color:'#555',font:{size:10}}},y:{stacked:true,grid:{color:'#1a1a1a'},ticks:{color:'#555',font:{size:10}}}}}});
+  const donutEl = document.getElementById('donutChart'); if (!donutEl) return; const donutCtx = donutEl.getContext('2d');
+  donutChartInstance = new Chart(donutCtx, {type:'doughnut',data:{labels:['Auto','Escalate','Review'],datasets:[{data:[0,0,0],backgroundColor:['#00FFEE40','#FF330040','#FF660040'],borderColor:['#00FFEE','#FF3300','#FF6600'],borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{color:'#555',font:{size:10},padding:10}}},cutout:'70%'}});
+}
+
+function updateCharts(alerts, stats) {
+  if (!weekChartInstance || !donutChartInstance) return;
+  const dayBuckets = [0,1,2,3,4,5,6].map(() => ({auto:0, escalate:0, review:0}));
+  const now = new Date();
+  const dayOfWeek = (now.getDay() + 6) % 7;
+  const startOfWeek = new Date(now);
+  startOfWeek.setDate(now.getDate() - dayOfWeek);
+  startOfWeek.setHours(0,0,0,0);
+  alerts.forEach(a => {
+    const t = new Date(a.timestamp);
+    if (t < startOfWeek) return;
+    const diffDays = Math.floor((t - startOfWeek) / 86400000);
+    if (diffDays < 0 || diffDays > 6) return;
+    if (a.decision === "auto_resolve") dayBuckets[diffDays].auto++;
+    else if (a.decision === "escalate") dayBuckets[diffDays].escalate++;
+    else if (a.decision === "review") dayBuckets[diffDays].review++;
+  });
+  weekChartInstance.data.datasets[0].data = dayBuckets.map(d => d.auto);
+  weekChartInstance.data.datasets[1].data = dayBuckets.map(d => d.escalate);
+  weekChartInstance.data.datasets[2].data = dayBuckets.map(d => d.review);
+  weekChartInstance.update();
+  donutChartInstance.data.datasets[0].data = [stats.auto_resolved || 0, stats.escalated || 0, stats.review || 0];
+  donutChartInstance.update();
+}
+
 window.addEventListener('load', () => {
-  function animateCount(el, target, duration) {
-    let start = 0;
-    const step = target / (duration / 16);
-    const timer = setInterval(() => { start += step; if (start >= target) { start = target; clearInterval(timer); } el.textContent = Math.floor(start); }, 16);
-  }
-  function animateBar(el, width, delay) { setTimeout(() => { el.style.width = width + '%'; }, delay); }
-  animateCount(document.getElementById('m1'), 31, 800);
-  animateCount(document.getElementById('m2'), 24, 1000);
-  animateCount(document.getElementById('m3'), 4, 600);
-  animateCount(document.getElementById('m4'), 3, 600);
-  animateBar(document.getElementById('b1'), 100, 200);
-  animateBar(document.getElementById('b2'), 77, 300);
-  animateBar(document.getElementById('b3'), 13, 400);
-  animateBar(document.getElementById('b4'), 10, 500);
-  const weekCtx = document.getElementById('weekChart').getContext('2d');
-  new Chart(weekCtx, {type:'bar',data:{labels:['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],datasets:[{label:'Auto',data:[18,22,15,24,19,8,5],backgroundColor:'#00FFEE30',borderColor:'#00FFEE',borderWidth:1,borderRadius:4},{label:'Escalate',data:[2,3,1,4,2,0,1],backgroundColor:'#FF330030',borderColor:'#FF3300',borderWidth:1,borderRadius:4},{label:'Review',data:[1,2,3,3,1,0,0],backgroundColor:'#FF660030',borderColor:'#FF6600',borderWidth:1,borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#555',font:{size:10}}}},scales:{x:{stacked:true,grid:{color:'#1a1a1a'},ticks:{color:'#555',font:{size:10}}},y:{stacked:true,grid:{color:'#1a1a1a'},ticks:{color:'#555',font:{size:10}}}}}});
-  const donutCtx = document.getElementById('donutChart').getContext('2d');
-  new Chart(donutCtx, {type:'doughnut',data:{labels:['Auto','Escalate','Review'],datasets:[{data:[24,4,3],backgroundColor:['#00FFEE40','#FF330040','#FF660040'],borderColor:['#00FFEE','#FF3300','#FF6600'],borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{color:'#555',font:{size:10},padding:10}}},cutout:'70%'}});
+  initCharts();
 });
 </script>
 
 <script>
+function escHtml(v) {
+  return String(v == null ? "" : v).replace(/[&<>"']/g, function(c) {
+    return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];
+  });
+}
+
+function renderAlertRows(container, list, emptyText) {
+  if (!container) return;
+  const header = container.querySelector(".section-header");
+  container.innerHTML = "";
+  if (header) container.appendChild(header);
+  if (!list || list.length === 0) {
+    const empty = document.createElement("div");
+    empty.style.cssText = "padding:24px;color:#444;text-align:center;font-size:13px;";
+    empty.textContent = emptyText;
+    container.appendChild(empty);
+    return;
+  }
+  const cls = { auto_resolve: "auto", escalate: "esc", review: "rev" };
+  const dataType = { auto_resolve: "auto", escalate: "escalate", review: "review" };
+  const label = { auto_resolve: "AUTO", escalate: "ESCALATE", review: "REVIEW" };
+  const icon = { auto_resolve: "ti-circle-check", escalate: "ti-alert-triangle", review: "ti-eye" };
+  const btnText = { auto_resolve: "View", escalate: "Review", review: "Triage" };
+  list.forEach(function(a) {
+    const c = cls[a.decision] || "rev";
+    const time = new Date(a.timestamp).toLocaleTimeString("en-US", {hour:"2-digit",minute:"2-digit"});
+    const row = document.createElement("div");
+    row.className = "alert-row";
+    row.dataset.type = dataType[a.decision] || "review";
+    row.innerHTML =
+      '<div class="icon-box ' + c + '"><i class="ti ' + (icon[a.decision] || "ti-eye") + '"></i></div>' +
+      '<div class="alert-info"><div class="alert-name">' + escHtml(a.ruleName) + " &mdash; " + escHtml(a.processName) + '</div>' +
+      '<div class="alert-host">' + escHtml(a.hostname) + " &middot; " + escHtml(a.organization || "Unknown org") + '</div></div>' +
+      '<div class="dec ' + c + '">' + (label[a.decision] || "REVIEW") + '</div>' +
+      '<div class="alert-time">' + time + '</div>' +
+      '<button class="act-btn">' + (btnText[a.decision] || "Review") + '</button>';
+    container.appendChild(row);
+  });
+}
+
+function renderOrganizations(alerts) {
+  const section = document.querySelector("#page-orgs .section");
+  if (!section) return;
+  const header = section.querySelector(".section-header");
+  const todayStr = new Date().toDateString();
+  const todayAlerts = alerts.filter(function(a) { return new Date(a.timestamp).toDateString() === todayStr; });
+  const orgCounts = {};
+  todayAlerts.forEach(function(a) {
+    const org = a.organization || "Unknown";
+    orgCounts[org] = (orgCounts[org] || 0) + 1;
+  });
+  section.innerHTML = "";
+  if (header) section.appendChild(header);
+  const wrap = document.createElement("div");
+  wrap.style.cssText = "padding:16px;display:flex;flex-direction:column;gap:12px;font-family:Arial,sans-serif";
+  const orgNames = Object.keys(orgCounts);
+  if (orgNames.length === 0) {
+    const empty = document.createElement("div");
+    empty.style.cssText = "padding:24px;color:#444;text-align:center;font-size:13px;";
+    empty.textContent = "No organization activity yet.";
+    wrap.appendChild(empty);
+  } else {
+    orgNames.forEach(function(org) {
+      const row = document.createElement("div");
+      row.style.cssText = "display:flex;align-items:center;gap:14px;padding:12px 16px;background:#1a1a1a;border-radius:8px";
+      row.innerHTML =
+        '<div class="active-dot"></div>' +
+        '<div style="flex:1"><div style="color:#fff;font-size:13px">' + escHtml(org) + '</div>' +
+        '<div style="color:#444;font-size:11px;margin-top:2px">' + orgCounts[org] + ' alert(s) today</div></div>' +
+        '<div style="color:#00FFEE;font-size:11px">Active</div>';
+      wrap.appendChild(row);
+    });
+  }
+  section.appendChild(wrap);
+}
+
+function renderReports(stats, alerts) {
+  const section = document.querySelector("#page-reports .section");
+  if (!section) return;
+  const total = stats.total || 0;
+  const autoN = stats.auto_resolved || 0;
+  const escN = stats.escalated || 0;
+  const revN = stats.review || 0;
+  const pct = function(n) { return total > 0 ? Math.round((n/total)*100) : 0; };
+  const todayStr = new Date().toDateString();
+  const todayAlerts = alerts.filter(function(a) { return new Date(a.timestamp).toDateString() === todayStr; });
+  const orgCounts = {};
+  todayAlerts.forEach(function(a) {
+    const org = a.organization || "Unknown";
+    orgCounts[org] = (orgCounts[org] || 0) + 1;
+  });
+  const orgNames = Object.keys(orgCounts);
+  const header = section.querySelector(".section-header");
+  section.innerHTML = "";
+  if (header) section.appendChild(header);
+  const orgHtml = orgNames.length
+    ? orgNames.map(function(o) { return '<div>' + escHtml(o) + ': <span style="color:#fff">' + orgCounts[o] + ' alert(s)</span></div>'; }).join("")
+    : '<div style="color:#444">No organization activity today.</div>';
+  const body = document.createElement("div");
+  body.style.cssText = "padding:24px;font-family:Arial,sans-serif;color:#555;font-size:13px;line-height:2";
+  body.innerHTML =
+    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">' +
+      '<div>' +
+        '<div style="color:#fff;font-size:11px;letter-spacing:1px;margin-bottom:12px">SUMMARY (TODAY)</div>' +
+        '<div>Total alerts processed: <span style="color:#fff">' + total + '</span></div>' +
+        '<div>Auto-resolved by SENTINEL: <span style="color:#00FFEE">' + autoN + ' (' + pct(autoN) + '%)</span></div>' +
+        '<div>Escalated to IT: <span style="color:#FF3300">' + escN + ' (' + pct(escN) + '%)</span></div>' +
+        '<div>Pending human review: <span style="color:#FF6600">' + revN + ' (' + pct(revN) + '%)</span></div>' +
+      '</div>' +
+      '<div>' +
+        '<div style="color:#fff;font-size:11px;letter-spacing:1px;margin-bottom:12px">BY ORGANIZATION (TODAY)</div>' +
+        orgHtml +
+      '</div>' +
+    '</div>';
+  section.appendChild(body);
+}
+
 async function loadData() {
   try {
     const [stats, alerts] = await Promise.all([
@@ -208,66 +343,40 @@ async function loadData() {
       fetch("/api/alerts").then(r => r.json())
     ]);
 
-    // Update metrics
     document.getElementById("m1").textContent = stats.total || 0;
     document.getElementById("m2").textContent = stats.auto_resolved || 0;
     document.getElementById("m3").textContent = stats.escalated || 0;
     document.getElementById("m4").textContent = stats.review || 0;
 
-    // Update bars
     const total = stats.total || 1;
     document.getElementById("b1").style.width = "100%";
     document.getElementById("b2").style.width = ((stats.auto_resolved/total)*100) + "%";
     document.getElementById("b3").style.width = ((stats.escalated/total)*100) + "%";
     document.getElementById("b4").style.width = ((stats.review/total)*100) + "%";
 
-    // Update badge
     const badge = document.querySelector(".badge");
     if (badge) badge.textContent = stats.review || 0;
 
-    // Update recent alerts section
-    const recentContainer = document.querySelector("#page-dashboard .section:last-child");
-    if (recentContainer && stats.recent && stats.recent.length > 0) {
-      const header = recentContainer.querySelector(".section-header");
-      recentContainer.innerHTML = "";
-      recentContainer.appendChild(header);
-      stats.recent.forEach(a => {
-        const typeMap = { auto_resolve: "auto", escalate: "escalate", review: "review" };
-        const labelMap = { auto_resolve: "AUTO", escalate: "ESCALATE", review: "REVIEW" };
-        const iconMap = { auto_resolve: "ti-circle-check", escalate: "ti-alert-triangle", review: "ti-eye" };
-        const t = typeMap[a.decision] || "review";
-        const time = new Date(a.timestamp).toLocaleTimeString("en-US", {hour:"2-digit",minute:"2-digit"});
-        const row = document.createElement("div");
-        row.className = "alert-row";
-        row.dataset.type = t;
-        row.innerHTML = `
-          <div class="icon-box ${t === "auto_resolve" ? "auto" : t === "escalate" ? "esc" : "rev"}">
-            <i class="ti ${iconMap[a.decision] || "ti-eye"}"></i>
-          </div>
-          <div class="alert-info">
-            <div class="alert-name">${a.ruleName} — ${a.processName}</div>
-            <div class="alert-host">${a.hostname} · ${a.organization}</div>
-          </div>
-          <div class="dec ${t === "auto_resolve" ? "auto" : t === "escalate" ? "esc" : "rev"}">${labelMap[a.decision] || "REVIEW"}</div>
-          <div class="alert-time">${time}</div>
-          <button class="act-btn">${t === "auto_resolve" ? "View" : "Review"}</button>
-        `;
-        recentContainer.appendChild(row);
-      });
-    } else if (recentContainer && (!stats.recent || stats.recent.length === 0)) {
-      const header = recentContainer.querySelector(".section-header");
-      recentContainer.innerHTML = "";
-      recentContainer.appendChild(header);
-      const empty = document.createElement("div");
-      empty.style.cssText = "padding:24px;color:#444;text-align:center;font-size:13px;";
-      empty.textContent = "No alerts processed yet.";
-      recentContainer.appendChild(empty);
-    }
+    renderAlertRows(document.getElementById("recent-alerts-section"), stats.recent, "No alerts processed yet.");
 
+    const pending = alerts.filter(function(a) { return a.decision === "escalate" || a.decision === "review"; });
+    renderAlertRows(document.querySelector("#page-alerts .section"), pending, "No pending alerts.");
+
+    const autoResolved = alerts.filter(function(a) { return a.decision === "auto_resolve"; });
+    const todayStr = new Date().toDateString();
+    const autoToday = autoResolved.filter(function(a) { return new Date(a.timestamp).toDateString() === todayStr; }).length;
+    const autoHeader = document.querySelector("#page-auto .section-header span");
+    if (autoHeader) autoHeader.textContent = autoToday + " today";
+    renderAlertRows(document.querySelector("#page-auto .section"), autoResolved, "No alerts auto-resolved yet.");
+
+    renderOrganizations(alerts);
+    renderReports(stats, alerts);
+    updateCharts(alerts, stats);
   } catch(e) {
     console.error("Failed to load data:", e);
   }
 }
+
 
 loadData();
 setInterval(loadData, 30000);
