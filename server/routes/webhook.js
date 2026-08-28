@@ -15,6 +15,7 @@ router.post("/edr", async (req, res) => {
     const result = await triageAlert(alert);
     notify(alert, result);
     addAlert(alert, result.decision, result.reason);
+    console.log(`[DEBUG] messageId=${JSON.stringify(alert.messageId)} decision=${JSON.stringify(result.decision)} ruleName=${JSON.stringify(alert.ruleName)} parentProcessName=${JSON.stringify(alert.parentProcessName)}`);
     if (alert.messageId) {
       if (result.decision === "auto_resolve") {
         await addComment(alert.messageId, `[SENTINEL AUTO-RESOLVED] ${result.reason}`);
