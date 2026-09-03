@@ -1,4 +1,4 @@
-﻿const express = require("express");
+const express = require("express");
 const router = express.Router();
 const { triageAlert } = require("../lib/triage");
 const { notify } = require("../lib/notifier");
@@ -11,6 +11,7 @@ router.post("/edr", async (req, res) => {
     return res.status(401).json({ error: "Invalid secret" });
   }
   const alert = req.body;
+  console.log("RAW ALERT PAYLOAD:", JSON.stringify(alert, null, 2));
   try {
     const result = await triageAlert(alert);
     notify(alert, result);
