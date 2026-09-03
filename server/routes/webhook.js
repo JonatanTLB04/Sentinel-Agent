@@ -16,24 +16,27 @@ router.post("/edr", async (req, res) => {
     const result = await triageAlert(alert);
     notify(alert, result);
     addAlert(alert, result.decision, result.reason);
-    console.log(`[DEBUG] messageId=${JSON.stringify(alert.messageId)} decision=${JSON.stringify(result.decision)} ruleName=${JSON.stringify(alert.ruleName)} parentProcessName=${JSON.stringify(alert.parentProcessName)}`);
-    if (alert.messageId) {
+    const messageId = alert.messageId || alert.id || alert.threatId || alert.detectionId || alert.itemId || alert.uid;
+    const ruleName = alert.ruleName || alert.flagName || alert.detectionName;
+    const parentProcessName = alert.parentProcessName || alert.processName || alert.grandParentProcessName;
+    console.log(`[DEBUG] messageId=${JSON.stringify(messageId)} decision=${JSON.stringify(result.decision)} ruleName=${JSON.stringify(ruleName)} parentProcessName=${JSON.stringify(parentProcessName)}`);
+    if (messageId) {
       if (result.decision === "auto_resolve") {
-        await addComment(alert.messageId, `[SENTINEL AUTO-RESOLVED] ${result.reason}`);
-        await acknowledgeAlert(alert.messageId);
-        if (alert.ruleName && alert.parentProcessName) {
+        await addComment(messageId, `[SENTINEL AUTO-RESOLVED] ${result.reason}`);
+        await acknowledgeAlert(messageId);
+        if (ruleName && parentProcessName) {
           await createSuppressionRule(
-            `SENTINEL - ${alert.ruleName} / ${alert.parentProcessName}`,
+            `SENTINEL - ${ruleName} / ${parentProcessName}`,
             `Auto-created by SENTINEL. ${result.reason}`,
-            alert.messageId,
-            alert.ruleName,
-            alert.parentProcessName
+            messageId,
+            ruleName,
+            parentProcessName
           );
         }
       } else if (result.decision === "escalate") {
-        await addComment(alert.messageId, `[SENTINEL ESCALATE] ${result.reason}`);
+        await addComment(messageId, `[SENTINEL ESCALATE] ${result.reason}`);
       } else {
-        await addComment(alert.messageId, `[SENTINEL REVIEW NEEDED] ${result.reason}`);
+        await addComment(messageId, `[SENTINEL REVIEW NEEDED] ${result.reason}`);
       }
     }
     res.status(200).json({ received: true, decision: result.decision });
