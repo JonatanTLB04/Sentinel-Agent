@@ -17,8 +17,8 @@ router.post("/edr", async (req, res) => {
     notify(alert, result);
     addAlert(alert, result.decision, result.reason);
     const messageId = alert.messageId || alert.id || alert.threatId || alert.detectionId || alert.itemId || alert.uid;
-    const ruleName = alert.ruleName || alert.flagName || alert.detectionName;
-    const parentProcessName = alert.parentProcessName || alert.processName || alert.grandParentProcessName;
+    const ruleName = alert.data?.ruleName || alert.ruleName || alert.flagName || alert.detectionName;
+    const parentProcessName = alert.data?.parentProcessName || alert.parentProcessName || alert.processName || alert.grandParentProcessName;
     console.log(`[DEBUG] messageId=${JSON.stringify(messageId)} decision=${JSON.stringify(result.decision)} ruleName=${JSON.stringify(ruleName)} parentProcessName=${JSON.stringify(parentProcessName)}`);
     if (messageId) {
       if (result.decision === "auto_resolve") {
