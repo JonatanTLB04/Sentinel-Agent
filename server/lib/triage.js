@@ -1,4 +1,4 @@
-﻿"use strict";
+"use strict";
 const Anthropic = require("@anthropic-ai/sdk");
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
@@ -52,10 +52,8 @@ function isTrustedSignature(alert) {
 }
 
 
-// Domains that are always safe destinations for curl/wget activity when
-// Datto itself says malicious=false and threatScore=0. These are Microsoft
-// and common cloud/dev infrastructure domains used by TLB for deployments,
-// package management, and API calls.
+// Known-safe destinations for curl/wget: auto-resolve when Datto confirms
+// malicious=false and threatScore=0. Applies to any user, any machine.
 const SAFE_CURL_DESTINATIONS = [
   "management.azure.com",
   ".azure.com",
@@ -74,76 +72,24 @@ const SAFE_CURL_DESTINATIONS = [
 ];
 
 function isSafeCurlDestination(alert) {
-  // Only applies when Datto itself says it's not malicious
   if (alert.malicious !== false || (alert.threatScore || 0) > 0) return false;
-
   const ruleName = (alert.ruleName || "").toLowerCase();
   if (!ruleName.includes("curl") && !ruleName.includes("wget")) return false;
-
-  // Check commandLine for known-safe domains
   const cmd = alert.commandLine || "";
-  return SAFE_CURL_DESTINATIONS.some((domain) => cmd.includes(domain));
-}
-
-
-// Domains that are always safe destinations for curl/wget activity when
-// Datto itself says malicious=false and threatScore=0. These are Microsoft
-// and common cloud/dev infrastructure domains used by TLB for deployments,
-// package management, and API calls.
-const SAFE_CURL_DESTINATIONS = [
-  "management.azure.com",
-  ".azure.com",
-  ".microsoft.com",
-  ".windows.net",
-  ".azurewebsites.net",
-  ".azurefd.net",
-  "github.com",
-  "api.github.com",
-  "raw.githubusercontent.com",
-  "analytics.brew.sh",
-  "formulae.brew.sh",
-  "pypi.org",
-  "files.pythonhosted.org",
-  "registry.npmjs.org",
-];
-
-function isSafeCurlDestination(alert) {
-  // Only applies when Datto itself says it's not malicious
-  if (alert.malicious !== false || (alert.threatScore || 0) > 0) return false;
-
-  const ruleName = (alert.ruleName || "").toLowerCase();
-  if (!ruleName.includes("curl") && !ruleName.includes("wget")) return false;
-
-  // Check commandLine for known-safe domains
-  const cmd = alert.commandLine || "";
-  return SAFE_CURL_DESTINATIONS.some((domain) => cmd.includes(domain));
+  return SAFE_CURL_DESTINATIONS.some((d) => cmd.includes(d));
 }
 
 function deterministicTriage(alert) {
-  // Tier 2a: curl/wget to known-safe Microsoft/cloud destinations
-  // with Datto confirming malicious=false and threatScore=0.
-  // Applies to any user on any machine.
+  // Tier 2a: curl/wget to known-safe destinations
   if (isSafeCurlDestination(alert)) {
     const dest = SAFE_CURL_DESTINATIONS.find((d) => (alert.commandLine || "").includes(d)) || "known-safe domain";
     return {
       decision: "auto_resolve",
-      reason: `curl/wget to known-safe destination (${dest}). Datto confirms malicious=false, threatScore=0. Normal deployment/package-management activity.`,
+      reason: `curl/wget to known-safe destination (${dest}). Datto confirms malicious=false, threatScore=0.`,
       tier: 2,
     };
   }
-  if (isConfirmedThreat(alert)) {
-  // Tier 2a: curl/wget to known-safe Microsoft/cloud destinations
-  // with Datto confirming malicious=false and threatScore=0.
-  // Applies to any user on any machine.
-  if (isSafeCurlDestination(alert)) {
-    const dest = SAFE_CURL_DESTINATIONS.find((d) => (alert.commandLine || "").includes(d)) || "known-safe domain";
-    return {
-      decision: "auto_resolve",
-      reason: `curl/wget to known-safe destination (${dest}). Datto confirms malicious=false, threatScore=0. Normal deployment/package-management activity.`,
-      tier: 2,
-    };
-  }
-  if (isConfirmedThreat(alert)) {
+
   if (isConfirmedThreat(alert)) {
     return {
       decision: "escalate",
@@ -217,7 +163,7 @@ Respond ONLY with this JSON shape, no other text:
     return {
       decision: "needs_human_review",
       recommendation: "needs_review",
-      reason: "Could not parse Claude response — flagging for manual review.",
+      reason: "Could not parse Claude response ? flagging for manual review.",
       suggestedNextStep: "Review Threat Details and Metadata manually.",
       tier: 5,
     };
