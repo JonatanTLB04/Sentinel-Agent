@@ -48,7 +48,7 @@ function getStats() {
     total: todayAlerts.length,
     auto_resolved: todayAlerts.filter(a => a.decision === "auto_resolve").length,
     escalated: todayAlerts.filter(a => a.decision === "escalate").length,
-    review: todayAlerts.filter(a => a.decision === "review").length,
+    review: todayAlerts.filter(a => a.decision === "review" || a.decision === "needs_human_review").length,
     recent: alerts.slice(0, 20),
   };
 }

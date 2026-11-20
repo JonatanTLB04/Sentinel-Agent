@@ -74,4 +74,38 @@ async function createSuppressionRule(name, description, alertId, ruleName, paren
   return false;
 }
 
-module.exports = { acknowledgeAlert, addComment, createSuppressionRule };
+// ---- read helpers used by the investigator (read-only) ----
+function edrGet(path) {
+  return new Promise((resolve, reject) => {
+    const req = https.request(
+      { hostname: EDR_HOST, port: 443, path, method: "GET", headers: { authorization: EDR_TOKEN, "content-type": "application/json" } },
+      (res) => {
+        let data = "";
+        res.on("data", (c) => { data += c; });
+        res.on("end", () => resolve({ status: res.statusCode, body: data }));
+      }
+    );
+    req.setTimeout(15000, () => req.destroy(new Error("EDR request timed out")));
+    req.on("error", reject);
+    req.end();
+  });
+}
+
+async function getAlertDetail(id) {
+  const r = await edrGet(`/api/AlertDetails/${encodeURIComponent(id)}`);
+  if (r.status !== 200) throw new Error(`EDR HTTP ${r.status}`);
+  return JSON.parse(r.body);
+}
+
+async function listAlertsByHost(hostname, days = 7) {
+  const since = new Date(Date.now() - days * 86400000).toISOString();
+  const filter = encodeURIComponent(JSON.stringify({ where: { hostname, createdOn: { gte: since } }, order: "createdOn DESC", limit: 50 }));
+  const r = await edrGet(`/api/AlertDetails?filter=${filter}`);
+  if (r.status !== 200) throw new Error(`EDR HTTP ${r.status}`);
+  return JSON.parse(r.body).filter((x) => {
+    const ra = x.data && x.data.ruleActions;
+    return !(ra && typeof ra.alert === "boolean") || ra.alert === true;
+  });
+}
+
+module.exports = { acknowledgeAlert, addComment, createSuppressionRule, getAlertDetail, listAlertsByHost };

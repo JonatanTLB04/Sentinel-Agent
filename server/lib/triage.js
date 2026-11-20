@@ -190,7 +190,10 @@ Respond ONLY with this JSON shape, no other text:
 async function triageAlert(alert) {
   const deterministic = deterministicTriage(alert);
   if (deterministic) return deterministic;
-  return claudeTriage(alert);
+  // Unknown alerts: investigate (observe mode by default = closes nothing).
+  const mode = (process.env.SENTINEL_INVESTIGATOR_MODE || "observe").toLowerCase();
+  if (mode === "legacy") return claudeTriage(alert);
+  return require("./investigation-triage").investigativeTriage(alert, mode);
 }
 
 module.exports = {

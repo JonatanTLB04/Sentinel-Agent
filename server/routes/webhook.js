@@ -4,6 +4,7 @@ const { triageAlert } = require("../lib/triage");
 const { notify } = require("../lib/notifier");
 const { acknowledgeAlert, addComment, createSuppressionRule } = require("../lib/edr-connector");
 const { addAlert } = require("../lib/store");
+const { redact } = require("../lib/redact");
 
 router.post("/edr", async (req, res) => {
   const secret = req.headers["x-sentinel-secret"];
@@ -11,9 +12,13 @@ router.post("/edr", async (req, res) => {
     return res.status(401).json({ error: "Invalid secret" });
   }
   const alert = req.body;
-  console.log("RAW ALERT PAYLOAD:", JSON.stringify(alert, null, 2));
+  console.log("RAW ALERT PAYLOAD:", JSON.stringify(redact(alert), null, 2));
   try {
     const result = await triageAlert(alert);
+    // Suppression rules hide FUTURE alerts of a whole rule+parent-process pair, org-wide.
+    // AI decisions never create them. Deterministic tiers only if explicitly enabled.
+    const allowSuppress = result.allowSuppression === true ||
+      (process.env.SENTINEL_AUTO_SUPPRESSION === "deterministic" && result.tier && result.tier <= 4);
     notify(alert, result);
     addAlert(alert, result.decision, result.reason);
     const messageId = alert.messageId || alert.id || alert.threatId || alert.detectionId || alert.itemId || alert.uid;
@@ -24,7 +29,7 @@ router.post("/edr", async (req, res) => {
       if (result.decision === "auto_resolve") {
         await addComment(messageId, `[SENTINEL AUTO-RESOLVED] ${result.reason}`);
         await acknowledgeAlert(messageId);
-        if (ruleName && parentProcessName) {
+        if (allowSuppress && ruleName && parentProcessName) {
           await createSuppressionRule(
             `SENTINEL - ${ruleName} / ${parentProcessName}`,
             `Auto-created by SENTINEL. ${result.reason}`,

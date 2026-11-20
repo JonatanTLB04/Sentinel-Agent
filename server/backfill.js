@@ -66,7 +66,7 @@ function logToDashboard(alert, decision, reason) {
     if (decision.decision === "auto_resolve") {
       await addComment(messageId, `[SENTINEL AUTO-RESOLVED - BACKFILL] ${decision.reason}`);
       await acknowledgeAlert(messageId);
-      if (ruleName && parentProcessName) {
+      if (decision.allowSuppression === true && ruleName && parentProcessName) {
         await createSuppressionRule(`SENTINEL - ${ruleName} / ${parentProcessName}`, "Auto-created by SENTINEL backfill.", messageId, ruleName, parentProcessName);
       }
     } else if (decision.decision === "escalate") {

@@ -6,7 +6,8 @@ const { acknowledgeAlert, addComment, createSuppressionRule } = require("./lib/e
 const EDR_HOST = "thelau9220.infocyte.com";
 const EDR_TOKEN = process.env.DATTO_EDR_TOKEN;
 const DASHBOARD_HOST = "sentinel-agent-production-aa41.up.railway.app";
-const DRY_RUN = process.argv.includes("--dry");
+const DRY_RUN = !process.argv.includes("--yes"); // safe by default: add --yes to really act
+if (DRY_RUN) console.log("DRY RUN: nothing will be changed. Re-run with --yes to act.");
 
 // Backfill for the ~1 week SENTINEL was down (free trial lapse). Filters by
 // date instead of the `archived` field -- that field does NOT mean "still
@@ -73,7 +74,7 @@ function logToDashboard(alert, decision, reason) {
     if (decision.decision === "auto_resolve") {
       await addComment(messageId, `[SENTINEL AUTO-RESOLVED - BACKFILL] ${decision.reason}`);
       await acknowledgeAlert(messageId);
-      if (ruleName && parentProcessName) {
+      if (decision.allowSuppression === true && ruleName && parentProcessName) {
         await createSuppressionRule(`SENTINEL - ${ruleName} / ${parentProcessName}`, "Auto-created by SENTINEL backfill.", messageId, ruleName, parentProcessName);
       }
     } else if (decision.decision === "escalate") {
