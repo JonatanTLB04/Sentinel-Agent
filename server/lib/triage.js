@@ -69,14 +69,31 @@ const SAFE_CURL_DESTINATIONS = [
   "pypi.org",
   "files.pythonhosted.org",
   "registry.npmjs.org",
+  "tw-bucket.s3.amazonaws.com",
+  "tw-bucket.s3-accelerate.amazonaws.com",
 ];
+
+function curlHosts(cmd) {
+  const hosts = [];
+  const re = /https?:\/\/([^\s\/:?#"']+)/gi;
+  let m;
+  while ((m = re.exec(cmd)) !== null) hosts.push(m[1].toLowerCase());
+  return hosts;
+}
+
+function hostIsSafe(host) {
+  return SAFE_CURL_DESTINATIONS.some((d) => {
+    const dom = d.toLowerCase();
+    return dom.startsWith(".") ? host.endsWith(dom) : host === dom;
+  });
+}
 
 function isSafeCurlDestination(alert) {
   if (alert.malicious !== false || (alert.threatScore || 0) > 0) return false;
   const ruleName = (alert.ruleName || "").toLowerCase();
   if (!ruleName.includes("curl") && !ruleName.includes("wget")) return false;
-  const cmd = alert.commandLine || "";
-  return SAFE_CURL_DESTINATIONS.some((d) => cmd.includes(d));
+  const hosts = curlHosts(alert.commandLine || "");
+  return hosts.length > 0 && hosts.every(hostIsSafe);
 }
 
 function deterministicTriage(alert) {
